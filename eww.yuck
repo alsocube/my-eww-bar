@@ -1,0 +1,35 @@
+(defwindow bar
+:monitor 0
+:exclusive true
+:wm-ignore false
+:geometry (geometry :x "0px" :y "5px" :width "85%" :height "4%" :anchor "bottom center")
+(bar))
+
+(defwidget bar []
+(centerbox :orientation "h"
+(left)
+(middle)
+(right)))
+
+(defwidget right []
+(box :class "time" :orientation "h" :halign "end"
+time))
+
+(defwidget middle []
+(box
+:class "music"
+:orientation "h"
+:halign "center"
+{music != "" ? "🎜  ${music}" : ""}))
+
+(defwidget left []
+(box :class "power" :orientation "h" :halign "start" :spcae-evenly false :vexpand false :hexpand true :spacing 15
+(button :onclick "shutdown now" :class "shutdown" "")
+(button :onclick "shutdown -r now" "")
+(button :onclick "(dolphin ~)" "")))
+
+(deflisten music :initial ""
+"playerctl --follow metadata --format '{{title}}' || true")
+
+(defpoll time :interval "5s"
+"date '+%H:%M  %b %d, %Y'")

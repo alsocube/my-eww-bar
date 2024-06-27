@@ -1,0 +1,25 @@
+* {
+  all: unset;
+}
+
+.bar {
+  background-color: rgba(0,0,0,0);
+  color: white;
+  padding: 5px;
+  border: solid 1px;
+  border-color: grey;
+}
+
+.power {
+  margin-left: 12px;
+  margin-right: 12px;
+  font-size: 21px;
+}
+
+.power button:hover {
+  color: cyan;
+}
+
+.time {
+  padding-right: 10px;
+}
