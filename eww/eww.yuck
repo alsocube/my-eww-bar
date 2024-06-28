@@ -2,7 +2,8 @@
 :monitor 0
 :exclusive true
 :wm-ignore false
-:geometry (geometry :x "0px" :y "4px" :width "100%" :height "4%" :anchor "top center")
+:stacking "bg"
+:geometry (geometry :x "0px" :y "4px" :width "100%" :height "3%" :anchor "top center")
 (widgets))
 
 (defwidget widgets []
@@ -18,21 +19,27 @@ time))
 
 (defwidget rightmiddle []
 (box :class "rightmiddle" :hexpand false
-" CPU"(label :text "${round(EWW_CPU.avg, 0)}%")
-" RAM"(label :text "${round(EWW_RAM.used_mem_perc, 0)}%")))
+""(label :text "${round(EWW_CPU.avg, 0)}%")
+""(label :text "${round(EWW_RAM.used_mem_perc, 0)}%")
+(image :path "img/battery.png" :image-height 14)
+battery))
 
 (defwidget leftmiddle []
 (box :class "leftmiddle" :orientation "h" :hexpand true
-{music != "" ? "🎜  ${music}" : ""}))
+{music != "" ? "${music}" : ""}))
 
 (defwidget left []
-(box :class "menu" :orientation "h" :space-evenly true :vexpand false :hexpand false :spacing 15
+(box :class "menu" :orientation "h" :space-evenly true :hexpand false :spacing 15
 (button :onclick "shutdown now" :class "shutdown" "")
 (button :onclick "shutdown -r now" "")
 (button :onclick "(dolphin ~)" "")))
 
-(deflisten music :initial ""
-"playerctl --follow metadata --format '{{title}}' || true")
+(deflisten music
+:initial "Nothing Playing Right Now"
+"playerctl --follow metadata --format '🎜  {{artist}} - {{title}}' || true")
 
 (defpoll time :interval "1s"
 "date '+%H:%M  %b %d'")
+
+(defpoll battery :interval "1s"
+"scripts/battery")
