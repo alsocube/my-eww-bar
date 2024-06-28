@@ -1,25 +1,49 @@
+$background: rgba(61,61,61,0.8);
+$border: rgb(85,73,74);
+
 * {
   all: unset;
 }
 
 .bar {
   background-color: rgba(0,0,0,0);
-  color: white;
+  color: rgb(201,201,201);
   padding: 5px;
-  border: solid 1px;
-  border-color: grey;
 }
 
-.power {
-  margin-left: 12px;
-  margin-right: 12px;
+.menu {
   font-size: 21px;
+  padding: 10px 15px 10px 15px;
+  border: solid 2px;
+  border-color: $border;
+  border-radius: 15px;
+  background-color: $background;
 }
 
-.power button:hover {
-  color: cyan;
+.menu button:hover {
+  color: white;
+}
+
+.leftmiddle {
+  border: solid 2px;
+  border-color: $border;
+  border-radius: 15px;
+  padding: 5px 15px 0px 15px;
+  background-color: $background;
+}
+
+.rightmiddle {
+  border: solid 2px;
+  border-color: $border;
+  border-radius: 15px;
+  padding: 5px 15px 5px 15px;
+  background-color: $background;
 }
 
 .time {
-  padding-right: 10px;
+  padding: 10px 15px 10px 15px;
+  border: solid 2px;
+  border-color: $border;
+  border-radius: 15px;
+  background-color: $background;
 }
