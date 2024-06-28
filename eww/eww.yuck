@@ -34,8 +34,7 @@ battery))
 (button :onclick "shutdown -r now" "")
 (button :onclick "(dolphin ~)" "")))
 
-(deflisten music
-:initial "Nothing Playing Right Now"
+(deflisten music :initial "🎜 Nothing Playing Right Now"
 "playerctl --follow metadata --format '🎜  {{artist}} - {{title}}' || true")
 
 (defpoll time :interval "1s"
