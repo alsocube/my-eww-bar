@@ -45,4 +45,3 @@ Let's assume you're using X11, then modify eww.yuck geometry
 :reserve (struts :distance "[int e.g 40px]" :side "top center")
 ...
 ```
-```
