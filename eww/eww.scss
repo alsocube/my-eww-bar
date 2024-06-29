@@ -27,7 +27,11 @@ $rad: 10px;
   color: cyan;
 }
 
-.leftmiddle {
+.menu button:active {
+  color: red;
+}
+
+.music {
   border: solid 2px;
   border-color: $border;
   border-radius: $rad;
@@ -37,13 +41,30 @@ $rad: 10px;
   font-family: $font;
 }
 
-.rightmiddle {
+.metrics {
   border: solid 2px;
   border-color: $border;
   border-radius: $rad;
   background-color: $background;
   padding: 0px 15px 0px 15px;
   font-family: $font;
+}
+
+.msctrl {
+  border: solid 2px;
+  border-color: $border;
+  border-radius: $rad;
+  background-color: $background;
+  padding: 0px 15px 0px 15px;
+  font-family: $font;
+}
+
+.msctrl button:hover {
+  color: cyan;
+}
+
+.msctrl button:active {
+  color: red;
 }
 
 .time {
