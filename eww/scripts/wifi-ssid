@@ -1,5 +1,10 @@
 #!/usr/bin/sh
 
-id="$(nmcli -t -f SSID device wifi | awk 'NR==1 {print NR,$0}' | cut -d ' ' -f2)"
+ssid="$(nmcli -t -f SSID device wifi | awk 'NR==1 {print NR,$0}' | cut -d " " -f2)"
+stat="$(nmcli -t -f ACTIVE device wifi | awk 'NR==1 {print NR,$0}' | cut -d " " -f2)"
 
-echo "$id"
+if [[ $stat == yes ]]; then
+	echo "$ssid"
+else
+	echo ""
+fi
