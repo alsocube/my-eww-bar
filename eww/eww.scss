@@ -1,9 +1,10 @@
 $background: rgba(61,61,61,0.8);
 $border: rgb(85,73,74);
+$font: "Noto Sans Mono Black";
+$rad: 10px;
 
 * {
   all: unset;
-  font-size: 14px;
 }
 
 .bar {
@@ -13,10 +14,10 @@ $border: rgb(85,73,74);
 }
 
 .menu {
-  font-size: 21px;
+  font-size: 18px;
   border: solid 2px;
   border-color: $border;
-  border-radius: 15px;
+  border-radius: $rad;
   background-color: $background;
   padding: 0px 15px 0px 15px;
 }
@@ -28,23 +29,26 @@ $border: rgb(85,73,74);
 .leftmiddle {
   border: solid 2px;
   border-color: $border;
-  border-radius: 15px;
+  border-radius: $rad;
   background-color: $background;
   padding-top: 4px;
+  font-family: $font;
 }
 
 .rightmiddle {
   border: solid 2px;
   border-color: $border;
-  border-radius: 15px;
+  border-radius: $rad;
   background-color: $background;
   padding: 0px 15px 0px 15px;
+  font-family: $font;
 }
 
 .time {
   border: solid 2px;
   border-color: $border;
-  border-radius: 15px;
+  border-radius: $rad;
   background-color: $background;
   padding: 0px 15px 0px 15px;
+  font-family: $font
 }
