@@ -19,6 +19,7 @@ time))
 
 (defwidget rightmiddle []
 (box :class "rightmiddle" :hexpand false :spacing 10 :space-evenly false
+(label :text "☼ ${brightness}")
 (label :text " ${round(EWW_CPU.avg, 0)}%")
 (label :text "🖴 ${round(EWW_RAM.used_mem_perc, 0)}%")
 (label :text "󰁹 ${battery}")
@@ -29,7 +30,7 @@ time))
 {music != "" ? "${music}" : ""}))
 
 (defwidget left []
-(box :class "menu" :orientation "h" :space-evenly true :hexpand false :spacing 15
+(box :class "menu" :orientation "h" :space-evenly false :hexpand false :spacing 15
 (button :onclick "shutdown now" :class "shutdown" "")
 (button :onclick "shutdown -r now" "")
 (button :onclick "(dolphin ~)" "")))
@@ -39,6 +40,9 @@ time))
 
 (defpoll ssid :interval "2s"
 "scripts/wifi name")
+
+(defpoll brightness :interval "1s"
+"scripts/bright")
 
 (deflisten music :initial "  Nothing Playing Right Now"
 "playerctl --follow metadata --format '  {{artist}} - {{title}}' || true")
