@@ -18,11 +18,11 @@
 time))
 
 (defwidget rightmiddle []
-(box :class "rightmiddle" :hexpand false
-""(label :text "${round(EWW_CPU.avg, 0)}%")
-""(label :text "${round(EWW_RAM.used_mem_perc, 0)}%")
-(image :path "img/battery.png" :image-height 14)
-battery))
+(box :class "rightmiddle" :hexpand false :spacing 10 :space-evenly false
+(label :text "   ${round(EWW_CPU.avg, 0)}%")
+(label :text "  ${round(EWW_RAM.used_mem_perc, 0)}%")
+(label :text "󰁹  ${battery}")
+(label :text "${wifi} ${wifi-ssid}")))
 
 (defwidget leftmiddle []
 (box :class "leftmiddle" :orientation "h" :hexpand true
@@ -34,11 +34,17 @@ battery))
 (button :onclick "shutdown -r now" "")
 (button :onclick "(dolphin ~)" "")))
 
-(deflisten music :initial "🎜 Nothing Playing Right Now"
+(defpoll wifi :interval "5s"
+"scripts/wifi")
+
+(defpoll wifi-ssid :interval "5s"
+"scripts/wifi-ssid")
+
+(deflisten music :initial "🎜  Nothing Playing Right Now"
 "playerctl --follow metadata --format '🎜  {{artist}} - {{title}}' || true")
 
 (defpoll time :interval "1s"
 "date '+%H:%M  %b %d'")
 
-(defpoll battery :interval "1s"
+(defpoll battery :interval "20s"
 "scripts/battery")
