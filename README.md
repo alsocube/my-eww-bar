@@ -1,6 +1,6 @@
 # Ayo?! Eww!!
 
-My simple, mostly "inspired", bar made with [Elkowar's Wacky Widget](https://github.com/elkowar/eww/) in Arch + Hyprland
+My simple, mostly "inspired" by others, bar made with [Elkowar's Wacky Widget](https://github.com/elkowar/eww/) in Arch + Hyprland
 
 I'm using XWayland, you might need to change some config accordingly.
 
@@ -25,7 +25,6 @@ Try installing noto-fonts and noto-fonts-emoji and phosphor icon
 
 • [ Scripts not running ]
 
-Take a look on your eww logs, if stated "permission denied" then
 ```
 chmod +x [all scripts files]
 ```
