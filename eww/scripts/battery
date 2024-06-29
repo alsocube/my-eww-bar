@@ -4,8 +4,8 @@ bat=/sys/class/power_supply/BAT1/
 stat="$(cat "$bat/status")"
 prcnt="$(cat "$bat/capacity")"
 
-battstatus() {
-if [[ $stat == "Not charging" ]] && [[ $prcnt == 100 ]]; then
+nocharge() {
+if [[ $prcnt == 100 ]]; then
 	echo "󰁹"
 elif [[ $prcnt > 79 ]]; then
 	echo "󰂂"
@@ -25,7 +25,11 @@ elif [[ $prcnt > 19 ]]; then
 elif [[ $prcnt > 9 ]]; then
 	echo "$(notify-send -t 5000 'BATTERY CRITICAL' 'Please Plug Your AC Adapter Immidiately')"
 	echo "󰂃"
-elif [[ $stat == "Charging" ]] && [[ $prcnt == 100 ]]; then
+fi
+}
+
+charge() {
+if [[ $prcnt == 100 ]]; then
 	echo "󰂅"
 elif [[ $prcnt > 89 ]]; then
 	echo "󰂋"
@@ -50,8 +54,12 @@ battprcnt() {
 	echo "$prcnt%"
 }
 
-if [ "$1" == "battstatus" ]; then
-	battstatus
+if [ "$1" == "battstatus" ] && [ $stat == "Charging" ]; then
+	charge
+elif [ "$1" == "battstatus" ] && [ $stat == "Discharging" ]; then
+	nocharge
+elif [ "$1" == "battstatus" ] && [ $stat == "Not charging" ]; then
+	nocharge
 elif [ "$1" == "battprcnt" ]; then
 	battprcnt
 fi
