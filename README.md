@@ -31,7 +31,7 @@ chmod +x [all scripts files]
 
 • [ Hyprland not reserving space for bar ]
 
-Let's assume you're using X11, then modify eww.yuck geometry
+Let's assume you're using X11, then modify eww.yuck
 ```
 ##delete##
 ...
