@@ -54,11 +54,11 @@ battprcnt() {
 	echo "$prcnt%"
 }
 
-if [ "$1" == "battstatus" ] && [ $stat == "Charging" ]; then
+if [ "$1" == "battstatus" ] && [ "$stat" == "Charging" ]; then
 	charge
-elif [ "$1" == "battstatus" ] && [ $stat == "Discharging" ]; then
+elif [ "$1" == "battstatus" ] && [ "$stat" == "Discharging" ]; then
 	nocharge
-elif [ "$1" == "battstatus" ] && [ $stat == "Not charging" ]; then
+elif [ "$1" == "battstatus" ] && [ "$stat" == "Not charging" ]; then
 	nocharge
 elif [ "$1" == "battprcnt" ]; then
 	battprcnt
