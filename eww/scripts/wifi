@@ -1,0 +1,9 @@
+#!/usr/bin/sh
+
+wif="$(nmcli -t -f IN-USE device wifi | awk '{if($1=="*")print$1}')"
+
+if [[ $wif == "*" ]]; then
+	echo "󰖩 Connected to"
+else
+	echo "󰖪 Disconnected"
+fi
