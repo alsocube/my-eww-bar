@@ -1,6 +1,57 @@
 #!/usr/bin/sh
 
 bat=/sys/class/power_supply/BAT1/
-per="$(cat "$bat/capacity")"
+stat="$(cat "$bat/status")"
+prcnt="$(cat "$bat/capacity")"
 
-echo "$per%"
+battstatus() {
+if [[ $stat == "Not charging" ]] && [[ $prcnt == 100 ]]; then
+	echo "󰁹"
+elif [[ $prcnt > 79 ]]; then
+	echo "󰂂"
+elif [[ $prcnt > 69 ]]; then
+	echo "󰂁"
+elif [[ $prcnt > 59 ]]; then
+	echo "󰂀"
+elif [[ $prcnt > 49 ]]; then
+	echo "󰁿"
+elif [[ $prcnt > 39 ]]; then
+	echo "󰁿"
+elif [[ $prcnt > 29 ]]; then
+	echo "󰁿"
+elif [[ $prcnt > 19 ]]; then
+	echo "$(notify-send -t 5000 'BATTERY LOW' 'Please Plug Your AC Adapter')"
+	echo "󰁻"
+elif [[ $prcnt > 9 ]]; then
+	echo "$(notify-send -t 5000 'BATTERY CRITICAL' 'Please Plug Your AC Adapter Immidiately')"
+	echo "󰂃"
+elif [[ $stat == "Charging" ]] && [[ $prcnt == 100 ]]; then
+	echo "󰂅"
+elif [[ $prcnt > 89 ]]; then
+	echo "󰂋"
+elif [[ $prcnt > 79 ]]; then
+	echo "󰂊"
+elif [[ $prcnt > 59 ]]; then
+	echo "󰂊"
+elif [[ $prcnt > 49 ]]; then
+	echo "󰂉"
+elif [[ $prcnt > 39 ]]; then
+	echo "󰂉"
+elif [[ $prcnt > 19 ]]; then
+	echo "󰂈"
+elif [[ $prcnt > 9 ]]; then
+	echo "󰂆"
+elif [[ $prcnt > 0 ]]; then
+	echo "󰂆"
+fi
+}
+
+battprcnt() {
+	echo "$prcnt%"
+}
+
+if [ "$1" == "battstatus" ]; then
+	battstatus
+elif [ "$1" == "battprcnt" ]; then
+	battprcnt
+fi
