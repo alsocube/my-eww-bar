@@ -28,27 +28,39 @@
 	(widgets))
 
 (defwidget widgets []
-(box :orientation "h" :space-evenly false :spacing 8
+(box :space-evenly false :hexpand false :spacing 8
+	(widgets_left)
+	(widgets_right)))
+
+(defwidget widgets_left []
+(box :orientation "h" :space-evenly false :hexpand true :spacing 8
 	(left)
-	(music)
 	(musictrl)
+	(music)))
+
+(defwidget widgets_right []
+(box :orientation "h" :space-evenly false :hexpand true :spacing 8
+	(wifi)
 	(metrics)
 	(right)))
 
 (defwidget right []
-(box :class "time" :orientation "h"
+(box :class "time" :orientation "h" :space-evenly false :spacing 8 :hexpand false :halign "center"
 time))
 
 (defwidget metrics []
-(box :class "metrics" :hexpand false :spacing 10 :space-evenly false
+(box :class "metrics" :hexpand false :space-evenly true :spacing 8 :halign "center"
 	(label :text "☼ ${brightness}")
 	(label :text " ${round(EWW_CPU.avg, 0)}%")
 	(label :text "🖴 ${round(EWW_RAM.used_mem_perc, 0)}%")
-	(label :text "󰁹 ${battery}")
-	(label :text "${wifi} ${ssid}")))
+	(label :text "󰁹 ${battery}")))
+
+(defwidget wifi []
+(box :class "metrics" :hexpand true
+(label :text "${wifi} ${ssid}")))
 
 (defwidget musictrl []
-(box :class "msctrl" :spacing 15
+(box :class "msctrl" :spacing 15 :space-evenly true
 (button :onclick "playerctl previous" "")
 (button :onclick "playerctl play-pause" "${playpause}")
 (button :onclick "playerctl next" "")))
@@ -58,7 +70,7 @@ time))
 {music != "" ? "${music}" : ""}))
 
 (defwidget left []
-(box :class "menu" :orientation "h" :space-evenly false :hexpand false :spacing 15
+(box :class "menu" :orientation "h" :space-evenly true :hexpand false :spacing 15
 (button :onclick "shutdown now" :class "shutdown" "")
 (button :onclick "shutdown -r now" "")
 (button :onclick "(dolphin ~)" "")))
