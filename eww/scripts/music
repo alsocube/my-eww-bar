@@ -1,0 +1,9 @@
+#!/usr/bin/sh
+
+stat="$(playerctl status)"
+
+if [ $stat == "Playing" ]; then
+	echo ""
+elif [ $stat == "Paused" ]; then
+	echo ""
+fi
