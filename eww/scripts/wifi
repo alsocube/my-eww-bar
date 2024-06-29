@@ -1,9 +1,19 @@
 #!/usr/bin/sh
 
-wif="$(nmcli -t -f ACTIVE device wifi | awk 'NR==1 {print NR,$0}' | cut -d " " -f2)"
+wifi="$(nmcli -f ACTIVE,SSID device wifi | grep "yes" | cut -d " " -f1)"
+ssid="$(nmcli -f ACTIVE,SSID device wifi | grep "yes" | cut -b 9-)"
 
-if [[ $wif == "yes" ]]; then
+status() {
+if [[ $wifi == "yes" ]]; then
 	echo "󰖩 Connected to"
 else
 	echo "󰖪 Disconnected"
 fi
+}
+
+name() {
+echo $ssid
+}
+
+[ "$1" == "status" ] && status && exit
+[ "$1" == "name" ] && name && exit
