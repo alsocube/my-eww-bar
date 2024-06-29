@@ -1,0 +1,5 @@
+#!/usr/bin/sh
+
+percent="$(xbacklight -get)"
+
+echo "$percent%"
