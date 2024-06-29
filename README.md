@@ -19,23 +19,28 @@ I'm using XWayland, you might need to change some config accordingly.
 
 # Troubleshoot
 
-• [Font missing]
+• [ Font missing ]
+
 Try installing noto-fonts and noto-fonts-emoji and phosphor icon
 
-• [Scripts not running]
+• [ Scripts not running ]
+
 Take a look on your eww logs, if stated "permission denied" then
 ```
 chmod +x [all scripts files]
 ```
 
-• [Hyprland not reserving space for bar]
+• [ Hyprland not reserving space for bar ]
+
 Let's assume you're using X11, then modify eww.yuck geometry
 ```
 ##delete##
 ...
 :exclusive true
 ...
+
 ##change to##
+
 ...
 :reserve (struts :distance "[int e.g 40px]" :side "top center")
 :
