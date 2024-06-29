@@ -13,8 +13,11 @@
 (defpoll time :interval "1s"
 "date '+%H:%M  %b %d'")
 
-(defpoll battery :interval "20s"
-"scripts/battery")
+(defpoll battstat :interval "20s"
+"scripts/battery battstatus")
+
+(defpoll battprcnt :interval "20s"
+"scripts/battery battprcnt")
 
 (defpoll playpause :interval "1s"
 "scripts/music")
@@ -53,7 +56,7 @@ time))
 	(label :text "☼ ${brightness}")
 	(label :text " ${round(EWW_CPU.avg, 0)}%")
 	(label :text "🖴 ${round(EWW_RAM.used_mem_perc, 0)}%")
-	(label :text "󰁹 ${battery}")))
+	(label :text "${battstat} ${battprcnt}")))
 
 (defwidget wifi []
 (box :class "metrics" :hexpand true
