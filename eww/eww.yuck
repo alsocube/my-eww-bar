@@ -1,48 +1,11 @@
-(defwindow bar
-:monitor 0
-:exclusive true
-:wm-ignore false
-:stacking "bg"
-:geometry (geometry :x "0px" :y "0px" :width "100%" :height "4%" :anchor "top center")
-(widgets))
-
-(defwidget widgets []
-(box :orientation "h" :space-evenly false :spacing 8
-(left)
-(leftmiddle)
-(rightmiddle)
-(right)))
-
-(defwidget right []
-(box :class "time" :orientation "h"
-time))
-
-(defwidget rightmiddle []
-(box :class "rightmiddle" :hexpand false :spacing 10 :space-evenly false
-(label :text "☼ ${brightness}")
-(label :text " ${round(EWW_CPU.avg, 0)}%")
-(label :text "🖴 ${round(EWW_RAM.used_mem_perc, 0)}%")
-(label :text "󰁹 ${battery}")
-(label :text "${wifi} ${ssid}")))
-
-(defwidget leftmiddle []
-(box :class "leftmiddle" :orientation "h" :hexpand true
-{music != "" ? "${music}" : ""}))
-
-(defwidget left []
-(box :class "menu" :orientation "h" :space-evenly false :hexpand false :spacing 15
-(button :onclick "shutdown now" :class "shutdown" "")
-(button :onclick "shutdown -r now" "")
-(button :onclick "(dolphin ~)" "")))
-
 (defpoll wifi :interval "2s"
 "scripts/wifi status")
 
 (defpoll ssid :interval "2s"
 "scripts/wifi name")
 
-(defpoll brightness :interval "1s"
-"scripts/bright")
+(defpoll brightness :interval
+"1s" "scripts/bright")
 
 (deflisten music :initial "  Nothing Playing Right Now"
 "playerctl --follow metadata --format '  {{artist}} - {{title}}' || true")
@@ -52,3 +15,50 @@ time))
 
 (defpoll battery :interval "20s"
 "scripts/battery")
+
+(defpoll playpause :interval "1s"
+"scripts/music")
+
+(defwindow bar
+:monitor 0
+:exclusive true
+:wm-ignore false
+:stacking "bg"
+:geometry (geometry :x "0px" :y "0px" :width "100%" :height "4%" :anchor "top center")
+	(widgets))
+
+(defwidget widgets []
+(box :orientation "h" :space-evenly false :spacing 8
+	(left)
+	(music)
+	(musictrl)
+	(metrics)
+	(right)))
+
+(defwidget right []
+(box :class "time" :orientation "h"
+time))
+
+(defwidget metrics []
+(box :class "metrics" :hexpand false :spacing 10 :space-evenly false
+	(label :text "☼ ${brightness}")
+	(label :text " ${round(EWW_CPU.avg, 0)}%")
+	(label :text "🖴 ${round(EWW_RAM.used_mem_perc, 0)}%")
+	(label :text "󰁹 ${battery}")
+	(label :text "${wifi} ${ssid}")))
+
+(defwidget musictrl []
+(box :class "msctrl" :spacing 15
+(button :onclick "playerctl previous" "")
+(button :onclick "playerctl play-pause" "${playpause}")
+(button :onclick "playerctl next" "")))
+
+(defwidget music []
+(box :class "music" :orientation "h" :hexpand true
+{music != "" ? "${music}" : ""}))
+
+(defwidget left []
+(box :class "menu" :orientation "h" :space-evenly false :hexpand false :spacing 15
+(button :onclick "shutdown now" :class "shutdown" "")
+(button :onclick "shutdown -r now" "")
+(button :onclick "(dolphin ~)" "")))
