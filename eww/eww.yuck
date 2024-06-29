@@ -22,7 +22,7 @@ time))
 (label :text " ${round(EWW_CPU.avg, 0)}%")
 (label :text "🖴 ${round(EWW_RAM.used_mem_perc, 0)}%")
 (label :text "󰁹 ${battery}")
-(label :text "${wifi} ${wifi-ssid}")))
+(label :text "${wifi} ${ssid}")))
 
 (defwidget leftmiddle []
 (box :class "leftmiddle" :orientation "h" :hexpand true
@@ -34,11 +34,11 @@ time))
 (button :onclick "shutdown -r now" "")
 (button :onclick "(dolphin ~)" "")))
 
-(defpoll wifi :interval "5s"
-"scripts/wifi")
+(defpoll wifi :interval "2s"
+"scripts/wifi status")
 
-(defpoll wifi-ssid :interval "5s"
-"scripts/wifi-ssid")
+(defpoll ssid :interval "2s"
+"scripts/wifi name")
 
 (deflisten music :initial "  Nothing Playing Right Now"
 "playerctl --follow metadata --format '  {{artist}} - {{title}}' || true")
