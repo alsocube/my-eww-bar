@@ -2,7 +2,7 @@
 
 My Take on Making A Simple Bar Using Elkowar's Wacky Widget on Hyprland
 
-<img src="showcase.png">
+<img src="picture.png">
 
 # How To Install
 
