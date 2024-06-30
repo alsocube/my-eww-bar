@@ -4,11 +4,14 @@
 (defpoll ssid :interval "2s"
 "scripts/wifi name")
 
-(defpoll brightness :interval
-"1s" "scripts/bright")
+(defpoll brightness :interval "1s" 
+"scripts/bright")
 
-(deflisten music :initial "  Nothing Playing Right Now"
-"playerctl --follow metadata --format '  {{artist}} - {{title}}' || true")
+(defpoll vol :interval "1s"
+"scripts/getvol")
+
+(deflisten music :initial "Nothing Playing Right Now~~"
+"playerctl --follow metadata --format '{{title}}' || true")
 
 (defpoll time :interval "1s"
 "date '+%H:%M  %b %d'")
@@ -25,41 +28,42 @@
 (defwindow bar
 :monitor 0
 :exclusive true
-:wm-ignore false
+:wm-ignore true
 :stacking "bg"
-:geometry (geometry :x "0px" :y "0px" :width "100%" :height "4%" :anchor "top center")
+:geometry (geometry :x "0px" :y "0px" :width "99%" :height "4%" :anchor "top center")
 	(widgets))
 
 (defwidget widgets []
-(box :space-evenly false :hexpand false :spacing 8
+(box :space-evenly false :hexpand false :spacing 5 :class "widgets"
 	(widgets_left)
 	(widgets_right)))
 
 (defwidget widgets_left []
-(box :orientation "h" :space-evenly false :hexpand true :spacing 8
+(box :orientation "h" :space-evenly false :hexpand true :spacing 5
 	(left)
 	(musictrl)
 	(music)))
 
 (defwidget widgets_right []
-(box :orientation "h" :space-evenly false :hexpand true :spacing 8
+(box :orientation "h" :space-evenly false :hexpand false :spacing 5
 	(wifi)
 	(metrics)
 	(right)))
 
 (defwidget right []
-(box :class "time" :orientation "h" :space-evenly false :spacing 8 :hexpand false :halign "center"
+(box :class "time" :orientation "h" :space-evenly false :spacing 8 :hexpand false
 time))
 
 (defwidget metrics []
-(box :class "metrics" :hexpand false :space-evenly true :spacing 8 :halign "center"
+(box :class "metrics" :hexpand false :space-evenly false :spacing 15
+	(label :text "${vol}")
 	(label :text "☼ ${brightness}")
 	(label :text " ${round(EWW_CPU.avg, 0)}%")
 	(label :text "🖴 ${round(EWW_RAM.used_mem_perc, 0)}%")
 	(label :text "${battstatus} ${battprcnt}")))
 
 (defwidget wifi []
-(box :class "metrics" :hexpand true
+(box :class "metrics" :hexpand false
 (label :text "${wifi} ${ssid}")))
 
 (defwidget musictrl []
@@ -70,7 +74,7 @@ time))
 
 (defwidget music []
 (box :class "music" :orientation "h" :hexpand true
-{music != "" ? "${music}" : ""}))
+{music != "  Nothing Playing Right Now" ? "${music}" : ""}))
 
 (defwidget left []
 (box :class "menu" :orientation "h" :space-evenly true :hexpand false :spacing 15
