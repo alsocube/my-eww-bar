@@ -1,5 +1,5 @@
-$mainbackground: rgba(67,57,70,0.6);
-$mainborder: rgb(80,112,149);
+$mainbackground: rgba(67,57,70,0.3);
+$mainborder: rgb(85,73,74);
 $background: rgba(80,112,149,0.35);
 $border: rgb(100,80,150);
 $fontcolor: rgb(195,195,195);
@@ -26,10 +26,10 @@ $rad: 9px;
 .menu {
   font-size: 18px;
   font-family: $font;
-  border: solid 2px;
+  //border: solid 2px;
   border-color: $border;
   border-radius: $rad;
-  background-color: $background;
+  //background-color: $background;
   padding: 0px 15px 0px 15px;
 }
 
@@ -42,10 +42,10 @@ $rad: 9px;
 }
 
 .music {
-  border: solid 2px;
+  //border: solid 2px;
   border-color: $border;
   border-radius: $rad;
-  background-color: $background;
+  //background-color: $background;
   padding-top: 2px;
   padding-bottom: 2px;
   font-family: $font;
@@ -53,19 +53,19 @@ $rad: 9px;
 }
 
 .metrics {
-  border: solid 2px;
+  //border: solid 2px;
   border-color: $border;
   border-radius: $rad;
-  background-color: $background;
+  //background-color: $background;
   padding: 0px 15px 0px 15px;
   font-family: $font;
 }
 
 .msctrl {
-  border: solid 2px;
+  //border: solid 2px;
   border-color: $border;
   border-radius: $rad;
-  background-color: $background;
+  //background-color: $background;
   padding: 0px 15px 0px 15px;
   font-family: $font;
 }
@@ -80,9 +80,9 @@ $rad: 9px;
 
 .time {
   font-family: $font;
-  border: solid 2px;
+  //border: solid 2px;
   border-color: $border;
   border-radius: $rad;
-  background-color: $background;
+  //background-color: $background;
   padding: 0px 15px 0px 15px;
 }
