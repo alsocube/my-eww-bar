@@ -10,16 +10,16 @@
 (defpoll vol :interval "1s"
 "scripts/getvol")
 
-(deflisten music :initial "Nothing Playing Right Now~~"
-"playerctl --follow metadata --format '{{title}}' || true")
+(defpoll getmusic :interval "1s"
+"scripts/getmusic")
 
 (defpoll time :interval "1s"
 "date '+%H:%M  %b %d'")
 
-(defpoll battstatus :interval "5s"
+(defpoll battstatus :interval "15s"
 "scripts/battery battstatus")
 
-(defpoll battprcnt :interval "5s"
+(defpoll battprcnt :interval "15s"
 "scripts/battery battprcnt")
 
 (defpoll playpause :interval "1s"
@@ -30,7 +30,7 @@
 :exclusive true
 :wm-ignore true
 :stacking "bg"
-:geometry (geometry :x "0px" :y "0px" :width "99%" :height "4%" :anchor "top center")
+:geometry (geometry :x "0px" :y "4px" :width "99%" :height "4%" :anchor "top center")
 	(widgets))
 
 (defwidget widgets []
@@ -73,8 +73,8 @@ time))
 (button :onclick "playerctl next" "")))
 
 (defwidget music []
-(box :class "music" :orientation "h" :hexpand true
-{music != "  Nothing Playing Right Now" ? "${music}" : ""}))
+(box :class "music" :orientation "h" :hexpand "true"
+(label :text "${getmusic}")))
 
 (defwidget left []
 (box :class "menu" :orientation "h" :space-evenly true :hexpand false :spacing 15
