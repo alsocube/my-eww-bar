@@ -1,0 +1,12 @@
+#!/usr/bin/sh
+
+music="$(playerctl metadata -f '{{ title }}')"
+stat="$(playerctl status)"
+
+if [ $stat == "Playing" ]; then
+	echo "$music"
+elif [ $stat == "Paused" ]; then
+	echo "++== Paused ==++"
+else
+	echo "Nothing Played Right Now"
+fi
