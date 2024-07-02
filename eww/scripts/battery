@@ -19,11 +19,15 @@ elif [[ $prcnt > 39 ]]; then
 	echo "󰁿"
 elif [[ $prcnt > 29 ]]; then
 	echo "󰁿"
-elif [[ $prcnt > 19 ]]; then
+elif [[ $prcnt == 20 ]]; then
 	echo "$(notify-send -t 5000 'BATTERY LOW' 'Please Plug Your AC Adapter')"
 	echo "󰁻"
-elif [[ $prcnt > 9 ]]; then
-	echo "$(notify-send -t 5000 'BATTERY CRITICAL' 'Please Plug Your AC Adapter Immidiately')"
+elif [[ $prcnt > 19 ]]; then
+	echo "󰁻"
+elif [[ $prcnt < 9 ]] && [[ $prcnt == 9 ]]; then
+	echo "$(notify-send -t 15000 'BATTERY CRITICAL' 'Please Plug Your AC Adapter Immidiately')"
+	echo "󰂃"
+elif [[ $prcnt < 9 ]]; then
 	echo "󰂃"
 fi
 }
@@ -31,21 +35,19 @@ fi
 charge() {
 if [[ $prcnt == 100 ]]; then
 	echo "󰂅"
-elif [[ $prcnt > 89 ]]; then
+elif [[ $prcnt < 89 ]] && [[ $prcnt > 79 ]]; then
 	echo "󰂋"
-elif [[ $prcnt > 79 ]]; then
+elif [[ $prcnt < 79 ]] && [[ $prcnt > 59 ]]; then
 	echo "󰂊"
-elif [[ $prcnt > 59 ]]; then
+elif [[ $prcnt < 59 ]] && [[ $prcnt > 49 ]]; then
 	echo "󰂊"
-elif [[ $prcnt > 49 ]]; then
-	echo "󰂉"
-elif [[ $prcnt > 39 ]]; then
-	echo "󰂉"
-elif [[ $prcnt > 19 ]]; then
+elif [[ $prcnt < 49 ]] && [[ $prcnt > 39 ]]; then
 	echo "󰂈"
-elif [[ $prcnt > 9 ]]; then
-	echo "󰂆"
-elif [[ $prcnt > 0 ]]; then
+elif [[ $prcnt < 39 ]] && [[ $prcnt > 29 ]]; then
+	echo "󰂈"
+elif [[ $prcnt < 29 ]] && [[ $prcnt > 9 ]]; then
+	echo "󰂈"
+elif [[ $prcnt < 9 ]]; then
 	echo "󰂆"
 fi
 }
