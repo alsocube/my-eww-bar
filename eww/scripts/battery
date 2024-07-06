@@ -2,31 +2,23 @@
 
 bat=/sys/class/power_supply/BAT1/
 stat="$(cat "$bat/status")"
-prcnt="$(cat "$bat/capacity")"
+prcnt="$(cat /sys/class/power_supply/BAT1/capacity | sed '/%d/g')"
 
 nocharge() {
 if [[ $prcnt == 100 ]]; then
 	echo "󰁹"
-elif [[ $prcnt > 79 ]]; then
+elif [[ $prcnt > 89 ]]; then
 	echo "󰂂"
-elif [[ $prcnt > 69 ]]; then
-	echo "󰂁"
-elif [[ $prcnt > 59 ]]; then
+elif [[ $prcnt > 79 ]]; then
 	echo "󰂀"
+elif [[ $prcnt > 59 ]]; then
+	echo "󰁿"
 elif [[ $prcnt > 49 ]]; then
 	echo "󰁿"
 elif [[ $prcnt > 39 ]]; then
-	echo "󰁿"
-elif [[ $prcnt > 29 ]]; then
-	echo "󰁿"
-elif [[ $prcnt == 20 ]]; then
-	echo "$(notify-send -t 5000 'BATTERY LOW' 'Please Plug Your AC Adapter')"
 	echo "󰁻"
-elif [[ $prcnt > 19 ]]; then
+elif [[ $prcnt < 29 ]]; then
 	echo "󰁻"
-elif [[ $prcnt < 9 ]] && [[ $prcnt == 9 ]]; then
-	echo "$(notify-send -t 15000 'BATTERY CRITICAL' 'Please Plug Your AC Adapter Immidiately')"
-	echo "󰂃"
 elif [[ $prcnt < 9 ]]; then
 	echo "󰂃"
 fi
@@ -35,17 +27,17 @@ fi
 charge() {
 if [[ $prcnt == 100 ]]; then
 	echo "󰂅"
-elif [[ $prcnt < 89 ]] && [[ $prcnt > 79 ]]; then
+elif [[ $prcnt < 90 ]] && [[ $prcnt > 79 ]]; then
 	echo "󰂋"
-elif [[ $prcnt < 79 ]] && [[ $prcnt > 59 ]]; then
+elif [[ $prcnt < 80 ]] && [[ $prcnt > 59 ]]; then
 	echo "󰂊"
-elif [[ $prcnt < 59 ]] && [[ $prcnt > 49 ]]; then
+elif [[ $prcnt < 60 ]] && [[ $prcnt > 49 ]]; then
 	echo "󰂊"
-elif [[ $prcnt < 49 ]] && [[ $prcnt > 39 ]]; then
+elif [[ $prcnt < 50 ]] && [[ $prcnt > 39 ]]; then
 	echo "󰂈"
-elif [[ $prcnt < 39 ]] && [[ $prcnt > 29 ]]; then
+elif [[ $prcnt < 40 ]] && [[ $prcnt > 29 ]]; then
 	echo "󰂈"
-elif [[ $prcnt < 29 ]] && [[ $prcnt > 9 ]]; then
+elif [[ $prcnt < 30 ]] && [[ $prcnt > 9 ]]; then
 	echo "󰂈"
 elif [[ $prcnt < 9 ]]; then
 	echo "󰂆"
