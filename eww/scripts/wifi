@@ -1,9 +1,10 @@
 #!/usr/bin/sh
 
-wifi="$(nmcli -f ACTIVE,SSID device wifi | grep "yes" | cut -d " " -f1)"
-ssid="$(nmcli -f ACTIVE,SSID device wifi | grep "yes" | cut -b 9-)"
+wifi="$(nmcli -f ACTIVE device wifi | grep "yes" | cut -d " " -f1)"
+ssid="$(nmcli -f ACTIVE,SSID device wifi | grep "yes" | awk -F" " '{print $2}')"
+str="$(nmcli -t -f ACTIVE,SIGNAL device wifi | grep "yes" | tr -cd '[[:digit:]]' | sed '/%d/g')"
 
-status() {
+stat() {
 if [[ $wifi == "yes" ]]; then
 	echo "󰖩 Connected to"
 else
@@ -15,5 +16,18 @@ name() {
 echo $ssid
 }
 
-[ "$1" == "status" ] && status && exit
+str() {
+if [[ $str > 79 ]]; then
+	echo "Excelent"
+elif [[ $str < 79 ]] || [[ $str = 79 ]]; then
+	echo "Good"
+elif [[ $str < 59 ]]; then
+	echo "Sub-par"
+elif [[ $str < 39 ]]; then
+	echo "Bad"
+fi
+}
+
+[ "$1" == "status" ] && stat && exit
 [ "$1" == "name" ] && name && exit
+[ "$1" == "str" ] && str && exit
