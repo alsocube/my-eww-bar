@@ -4,6 +4,9 @@
 (defpoll ssid :interval "2s"
 "scripts/wifi name")
 
+(defpoll strength :interval "2s"
+"scripts/wifi str")
+
 (defpoll brightness :interval "1s" 
 "scripts/bright")
 
@@ -16,7 +19,7 @@
 (defpoll time :interval "1s"
 "date '+%H:%M  %b %d'")
 
-(defpoll battstatus :interval "15s"
+(defpoll battstatus :interval "5s"
 "scripts/battery battstatus")
 
 (defpoll battprcnt :interval "15s"
@@ -64,7 +67,7 @@ time))
 
 (defwidget wifi []
 (box :class "metrics" :hexpand false
-(label :text "${wifi} ${ssid}")))
+(label :text "${wifi} ${ssid} | ${strength}")))
 
 (defwidget musictrl []
 (box :class "msctrl" :spacing 15 :space-evenly true
