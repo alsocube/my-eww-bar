@@ -1,5 +1,17 @@
 #!/usr/bin/sh
 
-percent="$(xbacklight -get)"
+prnt="$(xbacklight -get | sed '/%d/g')"
 
-echo "$percent%"
+if [[ $prnt == 100 ]]; then
+	echo "󱩖 $prnt%"
+elif [[ $prnt > 79 ]]; then
+	echo "󱩕 $prnt%"
+elif [[ $prnt > 59 ]]; then
+	echo "󱩔 $prnt%"
+elif [[ $prnt > 39 ]]; then
+	echo "󱩓 $prnt%"
+elif [[ $prnt > 19 ]]; then
+	echo "󱩐 $prnt%"
+elif [[ $prnt < 9 ]]; then
+	echo "󱧢 $prnt%"
+fi
