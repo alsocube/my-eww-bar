@@ -1,6 +1,7 @@
 $mainbackground: rgba(67,57,70,0.4);
 $mainborder: rgb(85,73,74);
-$background: rgba(80,112,149,0.35);
+$background: rgba(80,112,149,0.9);
+$popbox: rgb(44,30,66,1);
 $border: rgb(100,80,150);
 $fontcolor: rgb(195,195,195);
 $font: "Noto Sans Mono Black";
@@ -16,11 +17,25 @@ $rad: 9px;
   padding: 5px;
 }
 
-.widgets {
+.widgets, .bar2 {
   background-color: $mainbackground;
   border: solid 1px;
   border-color: $mainborder;
-  border-radius: 24px;
+  border-radius: 14px;
+}
+
+.ws {
+  color: $fontcolor;
+  font-family: $font;
+  font-size: 14px;
+}
+
+.ws button:hover {
+  color: cyan;
+}
+
+.ws button:active {
+  color: red;
 }
 
 .menu {
@@ -59,6 +74,10 @@ $rad: 9px;
   //background-color: $background;
   padding: 0px 15px 0px 15px;
   font-family: $font;
+}
+
+.metrics tooltip:hover {
+  background-color: black;
 }
 
 .msctrl {
