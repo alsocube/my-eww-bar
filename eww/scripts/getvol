@@ -1,13 +1,13 @@
 #!/usr/bin/sh
 
-vol="$(amixer sget Master | awk -F"[][]" '/Right:/ {print $2}')"
+vol="$(amixer sget Master | awk -F"[][]" '/Right:/ {print $2}' | tr -cd '[[:digit:]]' | sed '/%d/g')"
 
-if [[ $vol == "100%" ]]; then
-	echo " $vol"
-elif [[ $vol > "50%" ]]; then
-	echo " $vol"
-elif [[ $vol > "20%" ]]; then
-	echo " $vol"
-elif [[ "$vol" < "21%" ]]; then
-	echo " $vol"
+if [[ $vol == 100 ]]; then
+	echo "󰕾 $vol%"
+elif [[ $vol > 50 ]] || [[ $vol == 50 ]]; then
+	echo "󰕾 $vol%"
+elif [[ $vol < 50 ]] && [[ $vol > 0 ]]; then
+	echo "󰖀 $vol%"
+elif [[ $vol == 0 ]]; then
+	echo "󰸈 $vol%"
 fi
