@@ -6,4 +6,6 @@ if [ $stat == "Playing" ]; then
 	echo ""
 elif [ $stat == "Paused" ]; then
 	echo ""
+else
+	echo ""
 fi
