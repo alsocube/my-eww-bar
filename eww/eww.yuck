@@ -11,16 +11,19 @@
 "scripts/getmedia")
 
 (defpoll time :interval "1s"
-"date '+%H:%M:%S'")
+"date '+%A, %B %d [ %H:%M:%S ]'")
 
-(defpoll battstatus :interval "20s"
+(defpoll battstatus :interval "1s"
 "scripts/battery battstatus")
 
-(defpoll battprcnt :interval "20s"
+(defpoll battprcnt :interval "1s"
 "scripts/battery battprcnt")
 
 (defpoll playpause :interval "1s"
 "scripts/music")
+
+(defpoll activeworkspace :interval "1s"
+"scripts/workspaces")
 
 ;;=================================================================;;
 ;;===================		Bar		===================;;
@@ -47,67 +50,60 @@
 
 (defwidget widgets_right []
 (box :orientation "h" :space-evenly false :hexpand false :spacing 5
-	(wifi)
 	(metrics)
+	(wifi)
 	(right)))
 
 (defwidget right []
-(box :class "time" :orientation "h" :space-evenly false :spacing 8 :hexpand false
-time))
+	(box :class "time" :orientation "h" :hexpand false 
+	time))
 
 (defwidget metrics []
-(box :class "metrics" :hexpand false :space-evenly false :spacing 15 :tooltip "metrics"
-	(label :text "${vol}")
-	(label :text "${brightness}")
-	(label :text " ${round(EWW_CPU.avg, 0)}%")
-	(label :text " ${round(EWW_RAM.used_mem_perc, 0)}%")
-	(label :text "${battstatus} ${battprcnt}")))
+	(box :class "metrics" :hexpand false :space-evenly false :spacing 15 :tooltip "metrics"
+		(label :text "${vol}")
+		(label :text "${brightness}")
+		(label :text " ${round(EWW_CPU.avg, 0)}%")
+		(label :text " ${round(EWW_RAM.used_mem_perc, 0)}%")
+		(label :text "${battstatus} ${battprcnt}")))
 
 (defwidget wifi []
-(box :class "metrics" :hexpand false
-(label :text "${wifistat}")))
+	(box :class "metrics" :hexpand false
+		(label :text "${wifistat}")))
 
 (defwidget musictrl []
-(box :class "msctrl" :spacing 15 :space-evenly true
-(button :onclick "playerctl previous" "")
-(button :onclick "playerctl play-pause" "${playpause}")
-(button :onclick "playerctl next" "")))
+	(box :class "msctrl" :spacing 15 :space-evenly true
+		(button :onclick "playerctl previous" "")
+		(button :onclick "playerctl play-pause" "${playpause}")
+		(button :onclick "playerctl next" "")))
 
 (defwidget music []
-(box :class "music" :orientation "h" :hexpand "true"
-(label :text "${getmedia}")))
+	(box :class "music" :orientation "h" :hexpand "true"
+		(label :text "${getmedia}")))
 
 (defwidget left []
-(box :class "menu" :orientation "h" :space-evenly true :hexpand "false" :spacing 15
-(button :onclick "poweroff" "")
-(button :onclick "reboot" "")
-(button :onclick "(dolphin ~)" "")))
-
+	(box :class "menu" :orientation "h" :space-evenly true :hexpand "false" :spacing 15
+		(button :onclick "eww open bar2" "󰐦")))
 
 ;;=================================================================;;
-;;===================		Bar2		===================;;
+;;===================	       powerconf	===================;;
 ;;=================================================================;;
 
 (defwindow bar2
 :monitor 0
-:exclusive true
 :wm-ignore true
 :stacking "fg"
-:geometry (geometry :x "0px" :y "8px" :width "1900px" :height "38px" :anchor "bottom center")
-	(bar))
+:geometry (geometry :x "0px" :y "0px" :width "300px" :height "200px" :anchor "center")
+	(powerconf))
 
-(defwidget bar []
-(box :class "bar2" :orientation "h"
-(bar2)))
+(defwidget powerconf []
+	(box :class "powerconf"
+	(powerbox)))
 
-(defwidget bar2 []
-(box :class "ws" :orientation "h" :vexpand false :space-evenly false :halign "center" :spacing 20
-(button :onclick "(hyprctl dispatch workspace 1)" "1")
-(button :onclick "(hyprctl dispatch workspace 2)" "2")
-(button :onclick "(hyprctl dispatch workspace 3)" "3")
-(button :onclick "(hyprctl dispatch workspace 4)" "4")
-(button :onclick "(hyprctl dispatch workspace 5)" "5")
-(button :onclick "(hyprctl dispatch workspace 6)" "6")
-(button :onclick "(hyprctl dispatch workspace 7)" "7")
-(button :onclick "(hyprctl dispatch workspace 8)" "8")
-(button :onclick "(hyprctl dispatch workspace 9)" "9")))
+(defwidget powerbox []
+	(box :class "powerbox" :orientation "v" :vexpand true :hexpand false :valign "center"
+	(label :text "Power Menu" :style "font-size: 22px;")
+		(box :class "splitter" :orientation "v" :vexpand true :valign "center" (children :nth 0)
+		(box :class "pwrbuttons" :orientation "h" :space-evenly false :hexpand false :halign "center" :spacing 25
+			(button :class "poff" :onclick "poweroff" "󰐥")
+			(button :class "rbtt" :onclick "reboot" "󰑙")
+			(button :class "cncl" :onclick "eww close bar2" "󰑏")))))
