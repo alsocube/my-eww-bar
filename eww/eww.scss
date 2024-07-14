@@ -5,7 +5,7 @@ $popbox: rgb(44,30,66,1);
 $border: rgb(100,80,150);
 $fontcolor: rgb(195,195,195);
 $font: "Noto Sans Mono Black";
-$rad: 9px;
+$rad: 12px;
 
 * {
   all:unset;
@@ -17,31 +17,60 @@ $rad: 9px;
   padding: 5px;
 }
 
-.widgets, .bar2 {
+.bar2 {
+  background-color: rgba(0,0,0,0);
+  color: $fontcolor;
+  padding: 5px;
+}
+
+.widgets {
   background-color: $mainbackground;
   border: solid 1px;
   border-color: $mainborder;
   border-radius: 14px;
 }
 
-.ws {
+.powerconf {
   color: $fontcolor;
-  font-family: $font;
-  font-size: 14px;
+  background-color: rgb(40,35,50);
+  border: solid 1px;
+  border-color: $mainborder;
+  border-radius: 14px;
+  padding-bottom: 18px;
 }
 
-.ws button:hover {
-  color: cyan;
+.pwrbuttons {
+  font-size: 28px;
 }
 
-.ws button:active {
+.poff:hover {
   color: red;
 }
 
+.rbtt:hover {
+  color: cyan;
+}
+
+.cncl:hover {
+  color: purple;
+}
+
+.poff:active {
+  color: cyan;
+}
+
+.rbtt:active {
+  color: red;
+}
+
+.cncl:active {
+  color: orange;
+}
+
 .menu {
-  font-size: 18px;
+  font-size: 20px;
   font-family: $font;
-  //border: solid 2px;
+  //border: solid 1px;
   border-color: $border;
   border-radius: $rad;
   //background-color: $background;
