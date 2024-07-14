@@ -2,24 +2,22 @@
 
 bat=/sys/class/power_supply/BAT1/
 stat="$(cat "$bat/status")"
-prcnt="$(cat /sys/class/power_supply/BAT1/capacity | tr -cd '[[:digit:]]' | sed '/%d/g')"
+prcnt="$(cat "$bat/capacity" | tr -cd '[[:digit:]]')"
 
 nocharge() {
 if [[ $prcnt == 100 ]]; then
 	echo "󰁹"
-elif [[ $prcnt > 90 ]]; then
+elif [[ $prcnt > 89 ]]; then
 	echo "󰂂"
-elif [[ $prcnt > 80 ]]; then
+elif [[ $prcnt > 79 ]]; then
 	echo "󰂀"
-elif [[ $prcnt > 60 ]]; then
+elif [[ $prcnt > 49 ]]; then
 	echo "󰁿"
-elif [[ $prcnt > 60 ]]; then
-	echo "󰁿"
-elif [[ $prcnt > 40 ]]; then
+elif [[ $prcnt > 29 ]]; then
+	echo "󰁼"
+elif [[ $prcnt > 19 ]] || [[ $prcnt == 19 ]] ; then
 	echo "󰁻"
-elif [[ $prcnt > 9 ]]; then
-	echo "󰁻"
-elif [[ $prcnt < 9 ]]; then
+elif [[ $prcnt < 19 ]]; then
 	echo "󰂃"
 fi
 }
@@ -27,19 +25,17 @@ fi
 charge() {
 if [[ $prcnt == 100 ]]; then
 	echo "󰂅"
-elif [[ $prcnt > 79 ]]; then
+elif [[ $prcnt > 89 ]]; then
 	echo "󰂋"
+elif [[ $prcnt > 79 ]]; then
+	echo "󰂊"
 elif [[ $prcnt > 59 ]]; then
-	echo "󰂊"
-elif [[ $prcnt > 49 ]]; then
-	echo "󰂊"
+	echo "󰂉"
 elif [[ $prcnt > 39 ]]; then
 	echo "󰂈"
-elif [[ $prcnt > 29 ]]; then
-	echo "󰂈"
-elif [[ $prcnt > 9 ]]; then
-	echo "󰂈"
-elif [[ $prcnt < 9 ]]; then
+elif [[ $prcnt > 19 ]] || [[ $prcnt == 19 ]]; then
+	echo "󰂇"
+elif [[ $prcnt < 19 ]]; then
 	echo "󰂆"
 fi
 }
@@ -48,12 +44,7 @@ battprcnt() {
 	echo "$prcnt%"
 }
 
-if [ "$1" == "battstatus" ] && [ "$stat" == "Charging" ]; then
-	charge
-elif [ "$1" == "battstatus" ] && [ "$stat" == "Discharging" ]; then
-	nocharge
-elif [ "$1" == "battstatus" ] && [ "$stat" == "Not charging" ]; then
-	nocharge
-elif [ "$1" == "battprcnt" ]; then
-	battprcnt
-fi
+[ "$1" == "battstatus" ] && [ "$stat" == "Charging" ] && charge && exit
+[ "$1" == "battstatus" ] && [ "$stat" == "Discharging" ] && nocharge && exit
+[ "$1" == "battstatus" ] && [ "$stat" == "Not charging" ] && nocharge && exit
+[ "$1" == "battprcnt" ] && battprcnt && exit
