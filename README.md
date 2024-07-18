@@ -8,6 +8,8 @@ I'm using XWayland, you might need to change some config accordingly. [Eww Wiki]
 <img src="picture.jpg">
 <img src="showcase.jpg">
 
+wallpaper made by [晓風](https://www.pixiv.net/en/users/6799681) https://www.pixiv.net/en/artworks/100223491
+
 # How To Install
 
   1. Install [Eww](https://github.com/elkowar/eww/)
