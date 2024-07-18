@@ -1,17 +1,15 @@
 #!/usr/bin/sh
 
-prnt="$(xbacklight -get | sed '/%d/g')"
+prnt="$(xbacklight -getf | awk -F"." '{print $1}' )"
 
-if [[ $prnt == 100 ]]; then
+if (( $prnt > 70 )); then
 	echo "󱩖 $prnt%"
-elif [[ $prnt > 79 ]]; then
-	echo "󱩕 $prnt%"
-elif [[ $prnt > 59 ]]; then
+elif (( $prnt > 40 )); then
 	echo "󱩔 $prnt%"
-elif [[ $prnt > 39 ]]; then
+elif (( $prnt > 20 )); then
 	echo "󱩓 $prnt%"
-elif [[ $prnt > 19 ]]; then
+elif (( $prnt > 10 )) || (( $prnt == 10 )); then
 	echo "󱩐 $prnt%"
-elif [[ $prnt < 9 ]]; then
+elif (( $prnt < 10 )); then
 	echo "󱧢 $prnt%"
 fi
