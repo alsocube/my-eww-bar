@@ -5,37 +5,37 @@ stat="$(cat "$bat/status")"
 prcnt="$(cat "$bat/capacity" | tr -cd '[[:digit:]]')"
 
 nocharge() {
-if [[ $prcnt == 100 ]]; then
+if (( $prcnt == 100 )); then
 	echo "󰁹"
-elif [[ $prcnt > 89 ]]; then
+elif (( $prcnt > 89 )); then
 	echo "󰂂"
-elif [[ $prcnt > 79 ]]; then
+elif (( $prcnt > 79 )); then
 	echo "󰂀"
-elif [[ $prcnt > 49 ]]; then
+elif (( $prcnt > 49 )); then
 	echo "󰁿"
-elif [[ $prcnt > 29 ]]; then
+elif (( $prcnt > 29 )); then
 	echo "󰁼"
-elif [[ $prcnt > 19 ]] || [[ $prcnt == 19 ]] ; then
+elif (( $prcnt > 19 )) || (( $prcnt == 19 )) ; then
 	echo "󰁻"
-elif [[ $prcnt < 19 ]]; then
+elif (( $prcnt < 19 )); then
 	echo "󰂃"
 fi
 }
 
 charge() {
-if [[ $prcnt == 100 ]]; then
+if (( $prcnt == 100 )); then
 	echo "󰂅"
-elif [[ $prcnt > 89 ]]; then
+elif (( $prcnt > 89 )); then
 	echo "󰂋"
-elif [[ $prcnt > 79 ]]; then
+elif (( $prcnt > 79 )); then
 	echo "󰂊"
-elif [[ $prcnt > 59 ]]; then
+elif (( $prcnt > 59 )); then
 	echo "󰂉"
-elif [[ $prcnt > 39 ]]; then
+elif (( $prcnt > 39 )); then
 	echo "󰂈"
-elif [[ $prcnt > 19 ]] || [[ $prcnt == 19 ]]; then
+elif (( $prcnt > 19 )) || (( $prcnt == 19 )); then
 	echo "󰂇"
-elif [[ $prcnt < 19 ]]; then
+elif (( $prcnt < 19 )); then
 	echo "󰂆"
 fi
 }
