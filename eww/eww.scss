@@ -2,10 +2,10 @@ $mainbackground: rgba(67,57,70,0.4);
 $mainborder: rgb(85,73,74);
 $background: rgba(80,112,149,0.9);
 $popbox: rgb(44,30,66,1);
-$border: rgb(100,80,150);
+$border: rgb(210,210,210);
 $fontcolor: rgb(195,195,195);
-$font: "Noto Sans Mono Black";
-$rad: 12px;
+$font: "Terminus";
+$rad: 8px;
 
 * {
   all:unset;
@@ -37,10 +37,12 @@ $rad: 12px;
   border-color: $mainborder;
   border-radius: 14px;
   padding-bottom: 18px;
+  font-family: $font;
 }
 
 .pwrbuttons {
   font-size: 28px;
+  font-family: $font;
 }
 
 .poff:hover {
@@ -68,7 +70,7 @@ $rad: 12px;
 }
 
 .menu {
-  font-size: 20px;
+  font-size: 22px;
   font-family: $font;
   //border: solid 1px;
   border-color: $border;
@@ -86,31 +88,35 @@ $rad: 12px;
 }
 
 .music {
-  //border: solid 2px;
+  border: dotted 1px;
   border-color: $border;
   border-radius: $rad;
-  //background-color: $background;
   padding-top: 2px;
   padding-bottom: 2px;
   font-family: $font;
-  font-size: 14px;
+  //font-size: 18px;
 }
 
 .metrics {
-  //border: solid 2px;
+  border: dotted 1px;
   border-color: $border;
   border-radius: $rad;
-  //background-color: $background;
   padding: 0px 15px 0px 15px;
   font-family: $font;
+  //font-size: 16px;
 }
 
-.metrics tooltip:hover {
-  background-color: black;
+.wifi {
+  font-family: $font;
+  //font-size: 18px;
+  padding: 0px 15px 0px 15px;
+  border: dotted 1px;
+  border-radius: $rad;
+  border-color: $border;
 }
 
 .msctrl {
-  //border: solid 2px;
+  border: dotted 1px;
   border-color: $border;
   border-radius: $rad;
   //background-color: $background;
@@ -128,7 +134,8 @@ $rad: 12px;
 
 .time {
   font-family: $font;
-  //border: solid 2px;
+  //font-size: 18px;
+  border: dotted 1px;
   border-color: $border;
   border-radius: $rad;
   //background-color: $background;
