@@ -106,6 +106,12 @@ $rad: 8px;
   //font-size: 16px;
 }
 
+tooltip {
+  font-family: $font;
+  color: $fontcolor;
+  border-radius: $rad;
+}
+
 .wifi {
   font-family: $font;
   //font-size: 18px;
