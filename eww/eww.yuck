@@ -1,5 +1,8 @@
 (defpoll wifistat :interval "1s"
-"scripts/wifi")
+"scripts/wifi main")
+
+(defpoll wifistat2 :interval "1s"
+"scripts/wifi tooltip")
 
 (defpoll brightness :interval "1s" 
 "scripts/bright")
@@ -8,7 +11,10 @@
 "scripts/getvol")
 
 (defpoll getmedia :interval "1s"
-"scripts/getmedia")
+"scripts/getmedia short")
+
+(defpoll getmediafull :interval "1s"
+"scripts/getmedia full")
 
 (defpoll time :interval "1s"
 "date '+%A, %B %d [ %H:%M:%S ]'")
@@ -55,20 +61,20 @@
 	(right)))
 
 (defwidget right []
-	(box :class "time" :orientation "h" :hexpand false 
+	(box :class "time" :orientation "h" :hexpand false
 	time))
 
 (defwidget metrics []
-	(box :class "metrics" :hexpand false :space-evenly false :spacing 15 :tooltip "metrics"
-		(label :text "${vol}")
-		(label :text "${brightness}")
-		(label :text " ${round(EWW_CPU.avg, 0)}%")
-		(label :text " ${round(EWW_RAM.used_mem_perc, 0)}%")
-		(label :text "${battstatus} ${battprcnt}")))
+	(box :class "metrics" :hexpand false :space-evenly false :spacing 15
+		(label :text "${vol}" :tooltip "Volume")
+		(label :text "${brightness}" :tooltip "Brightness")
+		(label :text " ${round(EWW_CPU.avg, 0)}%" :tooltip "CPU Usage")
+		(label :text " ${round(EWW_RAM.used_mem_perc, 0)}%" :tooltip "RAM Usage")
+		(label :text "${battstatus} ${battprcnt}" :tooltip "Battery")))
 
 (defwidget wifi []
-	(box :class "metrics" :hexpand false
-		(label :text "${wifistat}")))
+	(box :class "wifi" :hexpand false
+		(label :text "${wifistat}" :tooltip "${wifistat2}")))
 
 (defwidget musictrl []
 	(box :class "msctrl" :spacing 15 :space-evenly true
@@ -78,7 +84,7 @@
 
 (defwidget music []
 	(box :class "music" :orientation "h" :hexpand "true"
-		(label :text "${getmedia}")))
+		(label :text "${getmedia}" :tooltip "${getmediafull}")))
 
 (defwidget left []
 	(box :class "menu" :orientation "h" :space-evenly true :hexpand "false" :spacing 15
