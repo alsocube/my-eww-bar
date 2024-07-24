@@ -1,8 +1,10 @@
 #!/usr/bin/sh
 
 music="$(playerctl metadata -f '{{ title }}')"
+artist="$(playerctl metadata -f '{{ artist }}')"
 stat="$(playerctl status)"
 
+media() {
 if [ $stat == "Playing" ]; then
 	echo "$music"
 elif [ $stat == "Paused" ]; then
@@ -10,3 +12,15 @@ elif [ $stat == "Paused" ]; then
 else
 	echo "Nothing Played Right Now"
 fi
+}
+
+tooltip() {
+if [ $stat == "Playing" ]; then
+	echo "Artist : $artist"
+else
+	echo " "
+fi
+}
+
+[ "$1" == "short" ] && media && exit
+[ "$1" == "full" ] && tooltip && exit
