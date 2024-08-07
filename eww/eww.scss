@@ -1,4 +1,4 @@
-$mainbackground: rgba(67,57,70,0.4);
+$mainbackground: rgba(44,44,52,0.4);
 $mainborder: rgb(85,73,74);
 $background: rgba(80,112,149,0.9);
 $popbox: rgb(44,30,66,1);
@@ -32,7 +32,7 @@ $rad: 8px;
 
 .powerconf {
   color: $fontcolor;
-  background-color: rgb(40,35,50);
+  background-color: rgba(40,35,50,1);
   border: solid 1px;
   border-color: $mainborder;
   border-radius: 14px;
@@ -93,6 +93,7 @@ $rad: 8px;
   border-radius: $rad;
   padding-top: 2px;
   padding-bottom: 2px;
+  margin-left: 2px;
   font-family: $font;
   //font-size: 18px;
 }
@@ -109,7 +110,10 @@ $rad: 8px;
 tooltip {
   font-family: $font;
   color: $fontcolor;
+  border: dotted 1px;
   border-radius: $rad;
+  border-color: $border;
+  background-color: rgba(47,47,49,1);
 }
 
 .wifi {
@@ -127,7 +131,7 @@ tooltip {
   border-radius: $rad;
   //background-color: $background;
   padding: 0px 15px 0px 15px;
-  font-family: $font;
+  font-family: "Phosphor";
 }
 
 .msctrl button:hover {
@@ -146,4 +150,22 @@ tooltip {
   border-radius: $rad;
   //background-color: $background;
   padding: 0px 15px 0px 15px;
+}
+
+.maintime {
+  font-family: "Terminus (TTF)", "Bold";
+  font-size: 60px;
+  color: rgba(44,44,52,1);
+}
+
+.bigtimetip {
+  font-family: "Terminus (TTF)", "Bold";
+  font-size: 20px;
+  color: rgba(104,93,113,25);
+}
+
+.maindate {
+  font-family: $font;
+  font-size: 30px;
+  color: rgba(44,44,52,1);
 }
