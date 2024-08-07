@@ -16,7 +16,7 @@ fi
 
 tooltip() {
 if [ $stat == "Playing" ]; then
-	echo "Artist : $artist"
+	echo "By: $artist"
 else
 	echo " "
 fi
