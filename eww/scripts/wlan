@@ -3,18 +3,20 @@
 stat="$(nmcli device status | grep "wlan0" | awk 'FNR==1 {print $3}')"
 ssid="$(nmcli -f ACTIVE,SSID device wifi | grep "yes" | awk -F" " '{print $2,$3,$4}')"
 str="$(nmcli -f ACTIVE,SIGNAL device wifi | grep "yes" | tr -cd '[[:digit:]]')"
+bluez="$(bluetoothctl info | grep "Name" | awk -F":"" " '{print $2}')"
+bluezstat="$(bluetoothctl info | grep "Missing" | awk -F" " '{print $1}')"
 
 main() {
 if [[ $stat == "connected" ]] && [[ $str > 79 ]]; then
-	echo "󰤨 Connected to $ssid"
+	echo "󰤨  $ssid"
 elif [[ $stat == "connected" ]] && [[ $str > 59 ]]; then
-	echo "󰤥 Connected to $ssid"
+	echo "󰤥  $ssid"
 elif [[ $stat == "connected" ]] && [[ $str > 39 ]]; then
-	echo "󰤢 Connected to $ssid"
+	echo "󰤢  $ssid"
 elif [[ $stat == "connected" ]] && [[ $str < 39 ]]; then
-	echo "󰤟 Connected to $ssid"
+	echo "󰤟  $ssid"
 elif [[ $stat == "disconnected" ]]; then
-	echo "󰤮 Disconnected"
+	echo "󰤮  Disconnected  "
 else
 	echo "󰤫 Reconnecting"
 fi
@@ -28,5 +30,14 @@ else
 fi
 }
 
+blueman() {
+if [[ $bluezstat == "Missing" ]]; then
+	echo " Disconnected"
+else
+	echo " $bluez"
+fi
+}
+
 [ "$1" == "main" ] && main && exit
 [ "$1" == "tooltip" ] && tooltip && exit
+[ "$1" == "bluetooth" ] && blueman && exit
