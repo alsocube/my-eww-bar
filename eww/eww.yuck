@@ -1,8 +1,15 @@
+;;=================================================================;;
+;;===================	      Variable		===================;;
+;;=================================================================;;
+
 (defpoll wifistat :interval "1s"
-"scripts/wifi main")
+"scripts/wlan main")
 
 (defpoll wifistat2 :interval "1s"
-"scripts/wifi tooltip")
+"scripts/wlan tooltip")
+
+(defpoll bluez :interval "1s"
+"scripts/wlan bluetooth")
 
 (defpoll brightness :interval "1s" 
 "scripts/bright")
@@ -17,7 +24,10 @@
 "scripts/getmedia full")
 
 (defpoll time :interval "1s"
-"date '+%A, %B %d [ %H:%M:%S ]'")
+"scripts/date fulldate")
+
+(defpoll timetip :interval "1s"
+"scripts/date timetip")
 
 (defpoll battstatus :interval "1s"
 "scripts/battery battstatus")
@@ -28,8 +38,14 @@
 (defpoll playpause :interval "1s"
 "scripts/music")
 
-(defpoll activeworkspace :interval "1s"
-"scripts/workspaces")
+(defpoll bigtime :interval "1s"
+"date '+%H:%M:%S'")
+
+(defpoll bigdate :interval "1s"
+"date '+%A, %B %d'")
+
+(defpoll usagegpu :interval "1s"
+"scripts/usagegpu")
 
 ;;=================================================================;;
 ;;===================		Bar		===================;;
@@ -57,41 +73,42 @@
 (defwidget widgets_right []
 (box :orientation "h" :space-evenly false :hexpand false :spacing 5
 	(metrics)
-	(wifi)
+	(connection)
 	(right)))
 
 (defwidget right []
 	(box :class "time" :orientation "h" :hexpand false
-	time))
+		(label :text "${time}" :tooltip "${timetip}")))
 
 (defwidget metrics []
 	(box :class "metrics" :hexpand false :space-evenly false :spacing 15
 		(label :text "${vol}" :tooltip "Volume")
 		(label :text "${brightness}" :tooltip "Brightness")
-		(label :text " ${round(EWW_CPU.avg, 0)}%" :tooltip "CPU Usage")
-		(label :text " ${round(EWW_RAM.used_mem_perc, 0)}%" :tooltip "RAM Usage")
+		(label :text "󰟀 ${round(EWW_CPU.avg, 0)}%" :tooltip "CPU Usage")
+		(label :text " ${round(EWW_RAM.used_mem_perc, 0)}%" :tooltip "RAM Usage")
 		(label :text "${battstatus} ${battprcnt}" :tooltip "Battery")))
 
-(defwidget wifi []
-	(box :class "wifi" :hexpand false
-		(label :text "${wifistat}" :tooltip "${wifistat2}")))
+(defwidget connection []
+	(box :class "wifi" :hexpand false :space-evenly false :spacing 2
+		(label :text "${wifistat}" :tooltip "${wifistat2}")
+		(label :text "${bluez}")))
 
 (defwidget musictrl []
-	(box :class "msctrl" :spacing 15 :space-evenly true
-		(button :onclick "playerctl previous" "")
-		(button :onclick "playerctl play-pause" "${playpause}")
-		(button :onclick "playerctl next" "")))
+	(box :class "msctrl" :spacing 20 :space-evenly true
+		(button :onclick "playerctl previous" "" )
+		(button :onclick "playerctl play-pause" "${playpause}" )
+		(button :onclick "playerctl next" "")))
 
 (defwidget music []
 	(box :class "music" :orientation "h" :hexpand "true"
-		(label :text "${getmedia}" :tooltip "${getmediafull}")))
+		(label :class "labelmusic" :text "${getmedia}" :tooltip "${getmediafull}" :truncate true)))
 
 (defwidget left []
-	(box :class "menu" :orientation "h" :space-evenly true :hexpand "false" :spacing 15
-		(button :onclick "eww open bar2" "󰐦")))
+	(box :class "menu" :orientation "h" :hexpand "false" :spacing 15 
+		(button :tooltip "Power Menu" :onclick "eww open bar2" "󰐦")))
 
 ;;=================================================================;;
-;;===================	       powerconf	===================;;
+;;===================	      Powerconf		===================;;
 ;;=================================================================;;
 
 (defwindow bar2
@@ -110,6 +127,83 @@
 	(label :text "Power Menu" :style "font-size: 22px;")
 		(box :class "splitter" :orientation "v" :vexpand true :valign "center" (children :nth 0)
 		(box :class "pwrbuttons" :orientation "h" :space-evenly false :hexpand false :halign "center" :spacing 25
-			(button :class "poff" :onclick "poweroff" "󰐥")
-			(button :class "rbtt" :onclick "reboot" "󰑙")
-			(button :class "cncl" :onclick "eww close bar2" "󰑏")))))
+			(button :class "poff" :tooltip "Shutdown" :onclick "poweroff" "󰐥")
+			(button :class "rbtt" :tooltip "Reboot" :onclick "reboot" "󰑙")
+			(button :class "cncl" :tooltip "Back" :onclick "eww close bar2" "󰑏")))))
+
+;;=================================================================;;
+;;===================	      Big Clock		===================;;
+;;=================================================================;;
+
+
+(defwindow bigtime
+:monitor 0
+:wm-ignore true
+:stacking "bg"
+:geometry (geometry :x "590px" :y "290px")
+	(deskwidgets))
+
+(defwindow bigtimetip
+:monitor 0
+:wm-ignore true
+:stacking "bg"
+:geometry (geometry :x "0px" :y "15px" :anchor "bottom center")
+	(timetip))
+
+(defwidget deskwidgets []
+	(box :orientation "v" :space-evenly false :hexpand true
+	(bigtime)))
+
+(defwidget bigtime []
+	(box  :orientation "v" :space-evenly false
+		(label :class "maintime" :text "${bigtime}")
+		(label :class "maindate" :text "${bigdate}")))
+
+(defwidget timetip []
+	(label :class "bigtimetip" :text "${timetip}"))
+
+;;=================================================================;;
+;;===================	    PC Resources	===================;;
+;;=================================================================;;
+
+(defwindow pcres
+:monitor 0
+:wm-ignore true
+:stacking "bg"
+:geometry (geometry :x "20px" :y "20px" :anchor "bottom right")
+	(resbox))
+
+(defwidget resbox []
+	(box :orientation "h"
+	(pcres)
+	(disk)))
+
+(defwidget disk []
+	(box :space-evenly false :spacing 20 :orientation "v"
+		(box :orientation "v" :space-evenly false (children :nth 0)
+			(label :text "Root" :class "bigtimetip")
+			(circular-progress :class "maindate" :value "${EWW_DISK["/"].used_perc}" :thickness 8
+			(circular-progress :style "color: rgb(87,87,105);" :value "100" :thickness 35)))
+		(box :orientation "v" :space-evenly false (children :nth 1)
+			(label :text "nvme0n1p4" :class "bigtimetip")
+			(circular-progress :class "maindate" :value "${EWW_DISK["/mnt/nvme0n1p4"].used_perc}" :thickness 8
+			(circular-progress :style "color: rgb(87,87,105);" :value "100" :thickness 35)))
+		(box :orientation "v" :space-evenly false (children :nth 1)
+			(label :text "sda2" :class "bigtimetip")
+			(circular-progress :class "maindate" :value "${EWW_DISK["/mnt/sda2"].used_perc}" :thickness 8
+			(circular-progress :style "color: rgb(87,87,105);" :value "100" :thickness 35)))))
+
+(defwidget pcres []
+	(box :space-evenly false :spacing 20 :orientation "v"
+		(box :orientation "v" :space-evenly false
+			(label :text "CPU" :class "bigtimetip")
+			(circular-progress :class "maindate" :value "${EWW_CPU.avg}" :thickness 8
+			(circular-progress :style "color: rgb(87,87,105)" :value "100" :thickness 35)))
+		(box :orientation "v" :space-evenly false (children :nth 0)
+			(label :text "RAM" :class "bigtimetip")
+			(circular-progress :class "maindate" :value "${EWW_RAM.used_mem_perc}" :thickness 8
+			(circular-progress :style "color: rgb(87,87,105)" :value "100" :thickness 35)))
+		(box :orientation "v" :space-evenly false (children :nth 1)
+			(label :text "GPU" :class "bigtimetip")
+			(circular-progress :class "maindate" :value "${usagegpu}" :thickness 8
+			(circular-progress :style "color: rgb(87,87,105)" :value "100" :thickness 35)))))
