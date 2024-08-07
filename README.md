@@ -8,7 +8,7 @@ I'm using XWayland, you might need to change some config accordingly. [Eww Wiki]
 <img src="picture.jpg">
 <img src="showcase.jpg">
 
-wallpaper made by [晓風](https://www.pixiv.net/en/users/6799681) https://www.pixiv.net/en/artworks/100223491
+wallpaper made by [煤と埃](https://www.pixiv.net/en/users/32133224) https://www.pixiv.net/en/artworks/101402830
 
 # How To Install
 
