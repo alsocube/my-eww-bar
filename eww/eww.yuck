@@ -12,7 +12,7 @@
 "scripts/wlan bluetooth")
 
 (defpoll brightness :interval "1s" 
-"scripts/bright")
+"scripts/bright bar")
 
 (defpoll vol :interval "1s"
 "scripts/getvol")
@@ -47,6 +47,17 @@
 (defpoll usagegpu :interval "1s"
 "scripts/usagegpu")
 
+(defvar boxdashpower false)
+
+(defpoll whoami :interval "50s"
+"whoami")
+
+(defpoll hostname :interval "50s"
+"cat /etc/hostname")
+
+(defpoll dashhour :interval "20s"
+"date '+%H'")
+
 ;;=================================================================;;
 ;;===================		Bar		===================;;
 ;;=================================================================;;
@@ -60,7 +71,7 @@
 	(widgets))
 
 (defwidget widgets []
-(box :space-evenly false :hexpand false :spacing 5 :class "widgets"
+(box :space-evenly false :hexpand false :spacing 5 :class "bar"
 	(widgets_left)
 	(widgets_right)))
 
@@ -89,7 +100,7 @@
 		(label :text "${battstatus} ${battprcnt}" :tooltip "Battery")))
 
 (defwidget connection []
-	(box :class "wifi" :hexpand false :space-evenly false :spacing 2
+	(box :class "wifi" :hexpand false :space-evenly false :spacing 15
 		(label :text "${wifistat}" :tooltip "${wifistat2}")
 		(label :text "${bluez}")))
 
@@ -100,18 +111,18 @@
 		(button :onclick "playerctl next" "")))
 
 (defwidget music []
-	(box :class "music" :orientation "h" :hexpand "true"
-		(label :class "labelmusic" :text "${getmedia}" :tooltip "${getmediafull}" :truncate true)))
+	(box :class "media" :orientation "h" :hexpand "true"
+		(label :text "${getmedia}" :tooltip "${getmediafull}" :truncate true)))
 
 (defwidget left []
 	(box :class "menu" :orientation "h" :hexpand "false" :spacing 15 
-		(button :tooltip "Power Menu" :onclick "eww open bar2" "󰐦")))
+		(button :tooltip "Dashboard" :onclick "eww open dashboard" "󰁰")))
 
 ;;=================================================================;;
-;;===================	      Powerconf		===================;;
+;;===================	    To Be Deleted	===================;;
 ;;=================================================================;;
 
-(defwindow bar2
+(defwindow powerconf
 :monitor 0
 :wm-ignore true
 :stacking "fg"
@@ -129,7 +140,7 @@
 		(box :class "pwrbuttons" :orientation "h" :space-evenly false :hexpand false :halign "center" :spacing 25
 			(button :class "poff" :tooltip "Shutdown" :onclick "poweroff" "󰐥")
 			(button :class "rbtt" :tooltip "Reboot" :onclick "reboot" "󰑙")
-			(button :class "cncl" :tooltip "Back" :onclick "eww close bar2" "󰑏")))))
+			(button :class "cncl" :tooltip "Back" :onclick "eww close powerconf" "󰑏")))))
 
 ;;=================================================================;;
 ;;===================	      Big Clock		===================;;
@@ -140,7 +151,7 @@
 :monitor 0
 :wm-ignore true
 :stacking "bg"
-:geometry (geometry :x "590px" :y "290px")
+:geometry (geometry :x "590px" :y "310px")
 	(deskwidgets))
 
 (defwindow bigtimetip
@@ -170,40 +181,87 @@
 :monitor 0
 :wm-ignore true
 :stacking "bg"
-:geometry (geometry :x "20px" :y "20px" :anchor "bottom right")
+:geometry (geometry :x "15px" :y "15px" :anchor "bottom right")
 	(resbox))
 
 (defwidget resbox []
-	(box :orientation "h"
-	(pcres)
-	(disk)))
-
-(defwidget disk []
-	(box :space-evenly false :spacing 20 :orientation "v"
-		(box :orientation "v" :space-evenly false (children :nth 0)
-			(label :text "Root" :class "bigtimetip")
-			(circular-progress :class "maindate" :value "${EWW_DISK["/"].used_perc}" :thickness 8
-			(circular-progress :style "color: rgb(87,87,105);" :value "100" :thickness 35)))
-		(box :orientation "v" :space-evenly false (children :nth 1)
-			(label :text "nvme0n1p4" :class "bigtimetip")
-			(circular-progress :class "maindate" :value "${EWW_DISK["/mnt/nvme0n1p4"].used_perc}" :thickness 8
-			(circular-progress :style "color: rgb(87,87,105);" :value "100" :thickness 35)))
-		(box :orientation "v" :space-evenly false (children :nth 1)
-			(label :text "sda2" :class "bigtimetip")
-			(circular-progress :class "maindate" :value "${EWW_DISK["/mnt/sda2"].used_perc}" :thickness 8
-			(circular-progress :style "color: rgb(87,87,105);" :value "100" :thickness 35)))))
+	(box :orientation "h" :space-evenly false :spacing 35
+	(pcres)))
 
 (defwidget pcres []
-	(box :space-evenly false :spacing 20 :orientation "v"
-		(box :orientation "v" :space-evenly false
-			(label :text "CPU" :class "bigtimetip")
-			(circular-progress :class "maindate" :value "${EWW_CPU.avg}" :thickness 8
-			(circular-progress :style "color: rgb(87,87,105)" :value "100" :thickness 35)))
+	(box :space-evenly false :spacing 20 :orientation "h"
 		(box :orientation "v" :space-evenly false (children :nth 0)
-			(label :text "RAM" :class "bigtimetip")
-			(circular-progress :class "maindate" :value "${EWW_RAM.used_mem_perc}" :thickness 8
+			(label :text "CPU" :class "pcrestext")
+			(circular-progress :class "usage_cpu" :value "${EWW_CPU.avg}" :thickness 8
 			(circular-progress :style "color: rgb(87,87,105)" :value "100" :thickness 35)))
 		(box :orientation "v" :space-evenly false (children :nth 1)
-			(label :text "GPU" :class "bigtimetip")
-			(circular-progress :class "maindate" :value "${usagegpu}" :thickness 8
+			(label :text "RAM" :class "pcrestext")
+			(circular-progress :class "usage_ram" :value "${EWW_RAM.used_mem_perc}" :thickness 8
+			(circular-progress :style "color: rgb(87,87,105)" :value "100" :thickness 35)))
+		(box :orientation "v" :space-evenly false (children :nth 2)
+			(label :text "GPU" :class "pcrestext")
+			(circular-progress :class "usage_gpu" :value "${usagegpu}" :thickness 8
 			(circular-progress :style "color: rgb(87,87,105)" :value "100" :thickness 35)))))
+
+;;=================================================================;;
+;;===================	       Dashboard	===================;;
+;;=================================================================;;
+
+(defwindow dashboard
+:monitor 0
+:wm-ignore true
+:stacking "fg"
+:geometry (geometry :x "0px" :y "0px" :anchor "center")
+	(dashboard))
+
+(defwidget dashboard []
+(box :class "blurbg"
+	(overlay
+	(box :orientation "h" :space-evenly false :spacing 15
+		(box :orientation "v" :space-evenly false :spacing 15
+			(box :class "boxdash1" :orientation "v" :space-evenly false :spacing 15
+			(image :path "img/profile.jpg" :image-height "120" :image-width "120")
+			(label :class "dashboard1" :text "I'am ${whoami}")
+			(label :class "dashboard1" :text "@${hostname}"))
+		(box :class "boxdash2" :orientation "v" :space-evenly false :spacing 15
+			(label :text "Storage")
+			(box :orientation "h" :space-evenly false :spacing 17
+			(label :text "Root")
+			(box :orientation "h" :space-evenly false :hexpand true :tooltip "Storage in Use: ${round(EWW_DISK["/"].used_perc, 0)}%"
+			(scale :class "varbar1" :min 0 :max 101 :value "${round(EWW_DISK["/"].used_perc, 0)}" :hexpand true :active "false")))
+			(box :orientation "h" :space-evenly false :spacing 25
+			(label :text "SSD")
+			(box :orientation "h" :space-evenly false :hexpand true :tooltip "Storage in Use: ${round(EWW_DISK["/mnt/nvme0n1p4"].used_perc, 0)}%"
+			(scale :class "varbar2" :min 0 :max 101 :value "${round(EWW_DISK["/mnt/nvme0n1p4"].used_perc,0)}" :hexpand true :active "false")))
+			(box :orientation "h" :space-evenly false :spacing 25
+			(label :text "HDD")
+			(box :orientation "h" :space-evenly false :hexpand true :tooltip "Storage in Use: ${round(EWW_DISK["/mnt/sda2"].used_perc, 0)}%"
+			(scale :class "varbar3" :min 0 :max 101 :value "${round(EWW_DISK["/mnt/sda2"].used_perc, 0)}" :hexpand true :active "false")))))
+		(box :orientation "v" :space-evenly false :spacing 15
+			(box :class "boxdash3" :orientation "v" :space-evenly false :spacing 20
+				(box :tooltip "Files"
+				(button :onclick "(nautilus &) && eww close dashboard"
+				(image :path "img/nautilus.svg" :image-height 50 :image-width 50)))
+				(box :tooltip "Firefox"
+				(button :onclick "(firefox &) && eww close dashboard"
+				(image :path "img/firefox.svg" :image-height 50 :image-width 50)))
+				(box :tooltip "Steam"
+				(button :onclick "(steam &) && eww close dashboard"
+				(image :path "img/steam.svg" :image-height 50 :image-width 50)))
+				(box :tooltip "Discord"
+				(button :onclick "(discord &) && eww close dashboard"
+				(image :path "img/discord.svg" :image-height 50 :image-width 50))))
+			(box :class "boxdashpower" :orientation "v"
+				(eventbox :onhover "eww update boxdashpower=true" :onhoverlost "eww update boxdashpower=false"
+					(box :space-evenly false :orientation "v" :tooltip "Shutdown"
+					(button :onclick "poweroff" :class "poff"
+					(label :text "󰐦" :style "font-size: 45px;" :xalign 0.46))
+					(revealer :reveal boxdashpower :transition "slideup" :duration "1000ms"
+						(box :orientation "v"
+							(box :tooltip "Reboot"
+							(button :onclick "reboot" :class "rbtt"
+							(label :text "󰑙" :style "font-size: 45px;" :xalign 0.46)))
+							(box :tooltip "Close Dashboard"
+							(button :onclick "eww close dashboard && eww update boxdashpower=false" :class "cncl"
+							(label :text "" :style "font-size: 35px;" :xalign 0.46)))
+						))))))))))
