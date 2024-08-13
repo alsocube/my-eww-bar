@@ -47,4 +47,5 @@ battprcnt() {
 [ "$1" == "battstatus" ] && [ "$stat" == "Charging" ] && charge && exit
 [ "$1" == "battstatus" ] && [ "$stat" == "Discharging" ] && nocharge && exit
 [ "$1" == "battstatus" ] && [ "$stat" == "Not charging" ] && nocharge && exit
+[ "$1" == "battstatus" ] && [ "$stat" == "Full" ] && echo "󰁹" && exit
 [ "$1" == "battprcnt" ] && battprcnt && exit
