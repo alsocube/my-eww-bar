@@ -1,38 +1,40 @@
-$mainbackground: rgba(44,44,52,0.4);
+$mainbackground: rgba(44,44,52,0.6);
 $mainborder: rgb(85,73,74);
 $background: rgba(80,112,149,0.9);
-$popbox: rgb(44,30,66,1);
+$background2: rgba(44,44,52,1);
+//$popbox: rgb(44,30,66,1);
 $border: rgb(210,210,210);
 $fontcolor: rgb(195,195,195);
+$fontcolor2: rgba(44,44,52,1);
 $font: "Terminus";
 $rad: 8px;
+//rgba(40,35,50,1)
+//rgba(104,93,113,25)
 
 * {
   all:unset;
 }
 
+//-----------------------------Main Bar--------------------------------//
+
+/*.bar {
+  background-color: rgba(0,0,0,0);
+  color: $fontcolor;
+  padding: 5px;
+}*/
+
 .bar {
-  background-color: rgba(0,0,0,0);
-  color: $fontcolor;
-  padding: 5px;
-}
-
-.bar2 {
-  background-color: rgba(0,0,0,0);
-  color: $fontcolor;
-  padding: 5px;
-}
-
-.widgets {
   background-color: $mainbackground;
-  border: solid 1px;
+  border: dotted 1px;
   border-color: $mainborder;
   border-radius: 14px;
+  color: $fontcolor;
+  padding: 5px;
 }
 
 .powerconf {
   color: $fontcolor;
-  background-color: rgba(40,35,50,1);
+  background-color: $background2;
   border: solid 1px;
   border-color: $mainborder;
   border-radius: 14px;
@@ -40,43 +42,14 @@ $rad: 8px;
   font-family: $font;
 }
 
-.pwrbuttons {
-  font-size: 28px;
-  font-family: $font;
-}
-
-.poff:hover {
-  color: red;
-}
-
-.rbtt:hover {
-  color: cyan;
-}
-
-.cncl:hover {
-  color: purple;
-}
-
-.poff:active {
-  color: cyan;
-}
-
-.rbtt:active {
-  color: red;
-}
-
-.cncl:active {
-  color: orange;
-}
-
 .menu {
-  font-size: 22px;
+  font-size: 18px;
   font-family: $font;
-  //border: solid 1px;
+  border: dotted 1px;
   border-color: $border;
   border-radius: $rad;
   //background-color: $background;
-  padding: 0px 15px 0px 15px;
+  padding: 0px 18px 0px 15px;
 }
 
 .menu button:hover {
@@ -87,7 +60,7 @@ $rad: 8px;
   color: red;
 }
 
-.music {
+.media {
   border: dotted 1px;
   border-color: $border;
   border-radius: $rad;
@@ -152,8 +125,10 @@ tooltip {
   padding: 0px 15px 0px 15px;
 }
 
+//-----------------------------Big Clock on Your Desktop--------------------------------//
+
 .maintime {
-  font-family: "Terminus (TTF)", "Bold";
+  font-family: "Terminus (TTF)";
   font-size: 60px;
   color: rgba(44,44,52,1);
 }
@@ -161,11 +136,153 @@ tooltip {
 .bigtimetip {
   font-family: "Terminus (TTF)", "Bold";
   font-size: 20px;
-  color: rgba(104,93,113,25);
+  color: $fontcolor2;
 }
 
-.maindate {
+.maindate, .usage_gpu, .usage_ram, .usage_cpu {
   font-family: $font;
   font-size: 30px;
   color: rgba(44,44,52,1);
+}
+
+.pcrestext {
+  font-size: 20px;
+  font-family: "Terminus (TTF)", "Bold";
+  color: $fontcolor2;
+}
+
+//-----------------------------The Dashboard--------------------------------//
+
+.boxdash1 {
+  background-color: $background2;
+  padding: 50px 70px 50px 70px;
+  border-radius: $rad;
+  border: dotted 1px;
+  border-radius: $rad;
+}
+
+.boxdash2 {
+  background-color: $background2;
+  padding: 30px 20px 40px 20px;
+  border-radius: $rad;
+  font-family: "Terminus (TTF)", "Bold";
+  border: dotted 1px;
+  border-radius: $rad;
+}
+
+.boxdash3 {
+  background-color: $background2;
+  padding: 20px 20px 25px 20px;
+  border-radius: $rad;
+  border: dotted 1px;
+  border-radius: $rad;
+}
+
+.boxdashpower {
+  background-color: $background2;
+  padding: 10px 0px 10px 0px;
+  border-radius: $rad;
+  border: dotted 1px;
+  border-radius: $rad;
+}
+
+/*.boxdashexit {
+  background-color: $background2;
+  padding: 15px 0px 15px 0px;
+  border-radius: $rad;
+  border: dotted 1px;
+  border-radius: $rad;
+}*/
+
+.dashboard1 {
+  font-family: "Terminus (TTF)", "Bold";
+  font-size: 20px;
+  color: $fontcolor;
+}
+
+.blurbg {
+  background-color: rgba(0,0,0,0.7);
+  padding-left: 771px;
+  padding-right: 770px;
+  padding-top: 335px;
+  padding-bottom: 300px;
+}
+
+scale trough {
+  all: unset;
+  background-color: $fontcolor;
+  min-height: 14px;
+  min-width: 0px;
+  border-radius: 50px;
+}
+
+.varbar1 scale trough highlight {
+  all: unset;
+  background-color: pink;
+  border-radius: 50px;
+}
+
+.varbar1 trough highlight {
+  all: unset;
+  background-color: pink;
+  min-height: 14px;
+  min-width: 0px;
+  border-radius: 50px;
+}
+
+.varbar2 scale trough highlight {
+  all: unset;
+  background-color: lime;
+  border-radius: 50px;
+}
+
+.varbar2 trough highlight {
+  all: unset;
+  background-color: lime;
+  min-height: 14px;
+  min-width: 0px;
+  border-radius: 50px;
+}
+
+.varbar3 scale trough highlight {
+  all: unset;
+  background-color: cyan;
+  border-radius: 50px;
+}
+
+.varbar3 trough highlight {
+  all: unset;
+  background-color: cyan;
+  min-height: 14px;
+  min-width: 0px;
+  border-radius: 50px;
+}
+
+.pwrbuttons {
+  font-size: 28px;
+  font-family: $font;
+}
+
+.poff:hover {
+  color: red;
+}
+
+.rbtt:hover {
+  color: cyan;
+}
+
+.cncl:hover {
+  color: purple;
+}
+
+.poff:active {
+  color: cyan;
+}
+
+.rbtt:active {
+  color: red;
+}
+
+.cncl:active {
+  color: orange;
 }
