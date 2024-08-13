@@ -1,0 +1,32 @@
+#!/usr/bin/bash
+
+hour="$(date '+%H')"
+date="$(date '+%A, %B %d')"
+uptime="$(uptime -p)"
+zone="$(date '+%Z')"
+
+datetime() {
+	echo "$uptime "$(date '+[ %I:%M %p ]')""
+}
+
+sundial() {
+	if (( 10#$hour > 5 )) && (( 10#$hour < 12 )); then
+		echo " 󰃞  Good Morning World  "
+	elif (( 10#$hour > 11 )) && (( 10#$hour < 15 )); then
+		echo " 󰃠  Have A Nice Day  "
+	elif (( 10#$hour > 14 )) && (( 10#$hour < 17 )); then
+		echo " 󰃝  Soon The Night Will Come  "
+	elif (( 10#$hour > 16 )) && (( 10#$hour < 23 )); then
+		echo " 󰃜  The Night Is Charming  "
+	elif (( 10#$hour == 23 )); then
+		echo " 󰃛  Consider A Sleep  "
+	elif (( 10#$hour == 0 )) || (( 10#$hour > 0 )) && (( 10#$hour < 4 )); then
+		echo " 󰃚  If You Read This, Then You Haven't Got Any Sleep  "
+	fi
+}
+
+if [ "$1" == "fulldate" ]; then
+	datetime
+elif [ "$1" == "timetip" ]; then
+	sundial
+fi
