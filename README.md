@@ -7,7 +7,6 @@ I'm using XWayland, you might need to change some config accordingly. [Eww Wiki]
 # Showcases
 <img src="picture1.png">
 <img src="picture2.png">
-<img src="picture3.png">
 <img src="dashboard.png">
 
 wallpaper made by [煤と埃](https://www.pixiv.net/en/users/32133224) https://www.pixiv.net/en/artworks/101402830
