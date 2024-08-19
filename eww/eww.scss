@@ -15,7 +15,24 @@ $rad: 8px;
   all:unset;
 }
 
-//-----------------------------Main Bar--------------------------------//
+tooltip {
+  font-family: $font;
+  color: $fontcolor;
+  border: dotted 1px;
+  border-radius: $rad;
+  border-color: $border;
+  background-color: rgba(47,47,49,1);
+}
+
+/*trough {
+  all: unset;
+  background-color: $fontcolor;
+  min-width: 0px;
+  min-height: 0px;
+  border-radius: 50px;
+}*/
+
+//------------Main Top Bar------------//
 
 /*.bar {
   background-color: rgba(0,0,0,0);
@@ -24,12 +41,12 @@ $rad: 8px;
 }*/
 
 .bar {
-  background-color: $mainbackground;
-  border: dotted 1px;
-  border-color: $mainborder;
-  border-radius: 14px;
-  color: $fontcolor;
-  padding: 5px;
+  background-color: rgba(0,0,0,0);
+  //border: solid 1px;
+  //border-color: $mainborder;
+  //border-radius: 14px;
+  //color: $fontcolor;
+  //padding: 5px;
 }
 
 .powerconf {
@@ -48,7 +65,7 @@ $rad: 8px;
   border: dotted 1px;
   border-color: $border;
   border-radius: $rad;
-  //background-color: $background;
+  background-color: $background2;
   padding: 0px 18px 0px 15px;
 }
 
@@ -68,7 +85,8 @@ $rad: 8px;
   padding-bottom: 2px;
   margin-left: 2px;
   font-family: $font;
-  //font-size: 18px;
+  font-size: 15px;
+  background-color: $background2;
 }
 
 .metrics {
@@ -77,16 +95,48 @@ $rad: 8px;
   border-radius: $rad;
   padding: 0px 15px 0px 15px;
   font-family: $font;
-  //font-size: 16px;
+  font-size: 15px;
+  background-color: $background2;
 }
 
-tooltip {
-  font-family: $font;
-  color: $fontcolor;
-  border: dotted 1px;
-  border-radius: $rad;
-  border-color: $border;
-  background-color: rgba(47,47,49,1);
+.volbar trough {
+  background-color: $fontcolor;
+  min-width: 100px;
+  border-radius: 50px;
+}
+
+.volbar scale trough highlight {
+  all: unset;
+  background-color: yellow;
+  border-radius: 50px;
+}
+
+.volbar trough highlight {
+  all: unset;
+  background-color: yellow;
+  min-height: 7px;
+  min-width: 0px;
+  border-radius: 50px;
+}
+
+.bribar trough {
+  background-color: $fontcolor;
+  min-width: 100px;
+  border-radius: 50px
+}
+
+.bribar scale trough highlight {
+  all: unset;
+  background-color: purple;
+  border-radius: 50px;
+}
+
+.bribar trough highlight {
+  all: unset;
+  background-color: purple;
+  min-height: 7px;
+  min-width: 0px;
+  border-radius: 50px;
 }
 
 .wifi {
@@ -96,15 +146,16 @@ tooltip {
   border: dotted 1px;
   border-radius: $rad;
   border-color: $border;
+  background-color: $background2;
 }
 
 .msctrl {
   border: dotted 1px;
   border-color: $border;
   border-radius: $rad;
-  //background-color: $background;
   padding: 0px 15px 0px 15px;
   font-family: "Phosphor";
+  background-color: $background2;
 }
 
 .msctrl button:hover {
@@ -121,11 +172,11 @@ tooltip {
   border: dotted 1px;
   border-color: $border;
   border-radius: $rad;
-  //background-color: $background;
   padding: 0px 15px 0px 15px;
+  background-color: $background2;
 }
 
-//-----------------------------Big Clock on Your Desktop--------------------------------//
+//------------Big Clock on Desktop------------//
 
 .maintime {
   font-family: "Terminus (TTF)";
@@ -136,7 +187,7 @@ tooltip {
 .bigtimetip {
   font-family: "Terminus (TTF)", "Bold";
   font-size: 20px;
-  color: $fontcolor2;
+  color: $fontcolor;
 }
 
 .maindate, .usage_gpu, .usage_ram, .usage_cpu {
@@ -151,14 +202,13 @@ tooltip {
   color: $fontcolor2;
 }
 
-//-----------------------------The Dashboard--------------------------------//
+//------------The Dashboard------------//
 
 .boxdash1 {
   background-color: $background2;
   padding: 50px 70px 50px 70px;
   border-radius: $rad;
   border: dotted 1px;
-  border-radius: $rad;
 }
 
 .boxdash2 {
@@ -167,7 +217,6 @@ tooltip {
   border-radius: $rad;
   font-family: "Terminus (TTF)", "Bold";
   border: dotted 1px;
-  border-radius: $rad;
 }
 
 .boxdash3 {
@@ -175,24 +224,22 @@ tooltip {
   padding: 20px 20px 25px 20px;
   border-radius: $rad;
   border: dotted 1px;
-  border-radius: $rad;
 }
 
 .boxdashpower {
   background-color: $background2;
-  padding: 10px 0px 10px 0px;
+  padding: 10px 0px 9px 0px;
   border-radius: $rad;
   border: dotted 1px;
-  border-radius: $rad;
 }
 
-/*.boxdashexit {
+.boxdashvolbribar {
+  font-family: "Terminus (TTF)", "Bold";
   background-color: $background2;
-  padding: 15px 0px 15px 0px;
+  padding: 15px 15px 15px 15px;
   border-radius: $rad;
   border: dotted 1px;
-  border-radius: $rad;
-}*/
+}
 
 .dashboard1 {
   font-family: "Terminus (TTF)", "Bold";
@@ -208,26 +255,30 @@ tooltip {
   padding-bottom: 300px;
 }
 
-scale trough {
-  all: unset;
+.varbar1 trough {
   background-color: $fontcolor;
-  min-height: 14px;
-  min-width: 0px;
-  border-radius: 50px;
+  min-width: 100px;
+  border-radius: 50px
 }
 
 .varbar1 scale trough highlight {
   all: unset;
-  background-color: pink;
+  background-color: red;
   border-radius: 50px;
 }
 
 .varbar1 trough highlight {
   all: unset;
-  background-color: pink;
+  background-color: red;
   min-height: 14px;
   min-width: 0px;
   border-radius: 50px;
+}
+
+.varbar2 trough {
+  background-color: $fontcolor;
+  min-width: 100px;
+  border-radius: 50px
 }
 
 .varbar2 scale trough highlight {
@@ -244,6 +295,12 @@ scale trough {
   border-radius: 50px;
 }
 
+.varbar3 trough {
+  background-color: $fontcolor;
+  min-width: 100px;
+  border-radius: 50px
+}
+
 .varbar3 scale trough highlight {
   all: unset;
   background-color: cyan;
@@ -256,6 +313,48 @@ scale trough {
   min-height: 14px;
   min-width: 0px;
   border-radius: 50px;
+}
+
+.volbarvertical trough {
+  background-color: $fontcolor;
+  min-width: 20px;
+  min-height: 100px;
+  //border-radius: 50px
+}
+
+.volbarvertical scale trough highlight {
+  all: unset;
+  background-color: yellow;
+  //border-radius: 50px;
+}
+
+.volbarvertical trough highlight {
+  all: unset;
+  background-color: yellow;
+  min-height: 0px;
+  min-width: 20px;
+  //border-radius: 50px;
+}
+
+.bribarvertical trough {
+  background-color: $fontcolor;
+  min-width: 20px;
+  min-height: 100px;
+  //border-radius: 50px
+}
+
+.bribarvertical scale trough highlight {
+  all: unset;
+  background-color: purple;
+  //border-radius: 50px;
+}
+
+.bribarvertical trough highlight {
+  all: unset;
+  background-color: purple;
+  min-height: 0px;
+  min-width: 14px;
+  //border-radius: 50px;
 }
 
 .pwrbuttons {

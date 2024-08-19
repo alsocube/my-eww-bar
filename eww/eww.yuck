@@ -14,8 +14,14 @@
 (defpoll brightness :interval "1s" 
 "scripts/bright bar")
 
+(defpoll brightone :interval "1s" 
+"scripts/bright one")
+
 (defpoll vol :interval "1s"
-"scripts/getvol")
+"scripts/getvol vol")
+
+(defpoll vols :interval "1s"
+"scripts/getvol vols")
 
 (defpoll getmedia :interval "1s"
 "scripts/getmedia short")
@@ -58,6 +64,16 @@
 (defpoll dashhour :interval "20s"
 "date '+%H'")
 
+(defpoll xbacklight :interval "1s"
+"xbacklight -get")
+
+(defpoll numvol :interval "1s"
+"scripts/numvol")
+
+(defvar volbar false)
+
+(defvar bribar false)
+
 ;;=================================================================;;
 ;;===================		Bar		===================;;
 ;;=================================================================;;
@@ -67,7 +83,7 @@
 :exclusive true
 :wm-ignore true
 :stacking "bg"
-:geometry (geometry :x "0px" :y "8px" :width "1900px" :height "38px" :anchor "top center")
+:geometry (geometry :x "0px" :y "5px" :width "1900px" :height "28px" :anchor "top center")
 	(widgets))
 
 (defwidget widgets []
@@ -92,12 +108,24 @@
 		(label :text "${time}" :tooltip "${timetip}")))
 
 (defwidget metrics []
-	(box :class "metrics" :hexpand false :space-evenly false :spacing 15
-		(label :text "${vol}" :tooltip "Volume")
-		(label :text "${brightness}" :tooltip "Brightness")
-		(label :text "󰟀 ${round(EWW_CPU.avg, 0)}%" :tooltip "CPU Usage")
-		(label :text " ${round(EWW_RAM.used_mem_perc, 0)}%" :tooltip "RAM Usage")
-		(label :text "${battstatus} ${battprcnt}" :tooltip "Battery")))
+	(box :class "metrics" :hexpand true :space-evenly false :spacing 10
+		(eventbox :onrightclick "eww update volbar=false" :onclick "eww update volbar=true"
+			(box :tooltip "Volume" :orientation "h" :hexpand true :space-evenly false
+			(label :text "[${vol}]")
+			(revealer :reveal volbar :transition "slideleft" :duration "700ms"
+				(box :orientation "h" :hexpand true :style "padding-left: 5px;" :space-evenly false :spacing 10
+				(label :text "${vols}")
+				(scale :class "volbar" :min 0 :max 101 :value "${numvol}" :onchange "amixer sset Master {}%" :orientation "h")))))
+		(eventbox :onrightclick "eww update bribar=false" :onclick "eww update bribar=true"
+			(box :space-evenly false :tooltip "Brightness"
+			(label :text "[${brightness}]")
+			(revealer :reveal bribar :transition "slideleft" :duration "700ms"
+				(box :orientation "h" :hexpand true :style "padding-left: 5px;" :space-evenly false :spacing 10
+				(label :text "${brightone}")
+				(scale :class "bribar" :min 0 :max 101 :value "${xbacklight}" :onchange "xbacklight -set {}" :orientation "h")))))
+		;;(label :text "󰟀 ${round(EWW_CPU.avg, 0)}%" :tooltip "CPU Usage");;
+		;;(label :text " ${round(EWW_RAM.used_mem_perc, 0)}%" :tooltip "RAM Usage");;
+		(label :text "[${battstatus} ${battprcnt}%]" :tooltip "Battery")))
 
 (defwidget connection []
 	(box :class "wifi" :hexpand false :space-evenly false :spacing 15
@@ -151,7 +179,7 @@
 :monitor 0
 :wm-ignore true
 :stacking "bg"
-:geometry (geometry :x "590px" :y "310px")
+:geometry (geometry :x "805px" :y "315px")
 	(deskwidgets))
 
 (defwindow bigtimetip
@@ -189,7 +217,7 @@
 	(pcres)))
 
 (defwidget pcres []
-	(box :space-evenly false :spacing 20 :orientation "h"
+	(box :space-evenly false :spacing 20 :orientation "v"
 		(box :orientation "v" :space-evenly false (children :nth 0)
 			(label :text "CPU" :class "pcrestext")
 			(circular-progress :class "usage_cpu" :value "${EWW_CPU.avg}" :thickness 8
@@ -218,6 +246,16 @@
 (box :class "blurbg"
 	(overlay
 	(box :orientation "h" :space-evenly false :spacing 15
+		(box :class "boxdashvolbribar" :space-evenly false :spacing 15
+			(box :space-evenly false :spacing 15 :orientation "v"
+				(label :text "${vols}" :vexpand false)
+				(scale :class "volbarvertical" :min 0 :max 101 :value "${numvol}" :onchange "amixer sset Master {}%" :orientation "v" :flipped true :vexpand true)
+				(label :text "${vol}" :vexpand false))
+			(box :space-evenly false :spacing 15 :orientation "v"
+				(label :text "${brightone}" :vexpand false)
+				(scale :class "bribarvertical" :min 0 :max 101 :value "${xbacklight}" :onchange "xbacklight -set {}" :orientation "v" :flipped true :vexpand true)
+				(label :text "${brightness}" :vexpand false)))
+		(box :space-evenly false :spacing 15
 		(box :orientation "v" :space-evenly false :spacing 15
 			(box :class "boxdash1" :orientation "v" :space-evenly false :spacing 15
 			(image :path "img/profile.jpg" :image-height "120" :image-width "120")
@@ -264,4 +302,4 @@
 							(box :tooltip "Close Dashboard"
 							(button :onclick "eww close dashboard && eww update boxdashpower=false" :class "cncl"
 							(label :text "" :style "font-size: 35px;" :xalign 0.46)))
-						))))))))))
+						)))))))))))

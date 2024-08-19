@@ -1,15 +1,20 @@
 #!/usr/bin/sh
 
-prnt="$(xbacklight -getf | awk -F"." '{print $1}' )"
+prnt="$(brightnessctl -m -d intel_backlight | awk -F, '{print substr($4, 0, length($4)-1)}')"
 
+bar() {
 if (( $prnt > 70 )); then
-	echo "󱩖 $prnt%"
+	echo "󱩖 "
 elif (( $prnt > 40 )); then
-	echo "󱩔 $prnt%"
+	echo "󱩔 "
 elif (( $prnt > 20 )); then
-	echo "󱩓 $prnt%"
+	echo "󱩓 "
 elif (( $prnt > 10 )) || (( $prnt == 10 )); then
-	echo "󱩐 $prnt%"
+	echo "󱩐 "
 elif (( $prnt < 10 )); then
-	echo "󱧢 $prnt%"
+	echo "󱧢 "
 fi
+}
+
+[ "$1" == "bar" ] && bar && exit
+[ "$1" == "one" ] && echo $prnt && exit

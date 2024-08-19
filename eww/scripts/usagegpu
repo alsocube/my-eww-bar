@@ -1,3 +1,9 @@
 #!/usr/bin/sh
 
-echo "$(nvidia-smi -q | grep "Gpu" | awk -F" " '{print $3}')"
+usage="$(nvidia-smi -q | grep "Gpu" | awk -F" " '{print $3}')"
+
+if [ $usage == "" ]; then
+	echo "1"
+else
+	echo $usage
+fi

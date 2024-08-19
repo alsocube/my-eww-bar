@@ -2,12 +2,21 @@
 
 vol="$(amixer sget Master | awk -F"[][]" '/Right:/ {print $2}' | tr -cd '[[:digit:]]' | sed '/%d/g')"
 
-if [[ $vol == 100 ]]; then
-	echo "󰕾 $vol%"
-elif [[ $vol > 50 ]] || [[ $vol == 50 ]]; then
-	echo "󰕾 $vol%"
-elif [[ $vol < 50 ]] && [[ $vol > 0 ]]; then
-	echo "󰖀 $vol%"
-elif [[ $vol == 0 ]]; then
-	echo "󰸈 $vol%"
+icons() {
+if (( 10#$vol == 100 )); then
+	echo "󰕾 "
+elif (( 10#$vol > 50 )) || (( 10#$vol == 50 )); then
+	echo "󰕾 "
+elif (( 10#$vol < 50 )) && (( 10#$vol > 0 )); then
+	echo "󰖀 "
+elif (( 10#$vol == 0 )); then
+	echo "󰸈 "
 fi
+}
+
+vols() {
+	echo "$vol"
+}
+
+[ "$1" == "vol" ] && icons && exit
+[ "$1" == "vols" ] && vols && exit

@@ -9,7 +9,7 @@ if (( $prcnt == 100 )); then
 	echo "󰁹"
 elif (( $prcnt > 89 )); then
 	echo "󰂂"
-elif (( $prcnt > 79 )); then
+elif (( $prcnt > 79 )) || (( $prcnt == 79 )); then
 	echo "󰂀"
 elif (( $prcnt > 49 )); then
 	echo "󰁿"
@@ -41,7 +41,7 @@ fi
 }
 
 battprcnt() {
-	echo "$prcnt%"
+	echo "$prcnt"
 }
 
 [ "$1" == "battstatus" ] && [ "$stat" == "Charging" ] && charge && exit

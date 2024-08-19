@@ -14,9 +14,9 @@ sundial() {
 		echo " 󰃞  Good Morning World  "
 	elif (( 10#$hour > 11 )) && (( 10#$hour < 15 )); then
 		echo " 󰃠  Have A Nice Day  "
-	elif (( 10#$hour > 14 )) && (( 10#$hour < 17 )); then
+	elif (( 10#$hour > 14 )) && (( 10#$hour < 19 )); then
 		echo " 󰃝  Soon The Night Will Come  "
-	elif (( 10#$hour > 16 )) && (( 10#$hour < 23 )); then
+	elif (( 10#$hour > 18 )) && (( 10#$hour < 23 )); then
 		echo " 󰃜  The Night Is Charming  "
 	elif (( 10#$hour == 23 )); then
 		echo " 󰃛  Consider A Sleep  "
