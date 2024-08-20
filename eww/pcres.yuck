@@ -1,0 +1,29 @@
+;;=================================================================;;
+;;===================       PC Resources        ===================;;
+;;=================================================================;;
+
+(defwindow pcres
+:monitor 0
+:wm-ignore true
+:stacking "bg"
+:geometry (geometry :x "15px" :y "15px" :anchor "bottom right")
+        (resbox))
+
+(defwidget resbox []
+        (box :orientation "h" :space-evenly false :spacing 35
+        (pcres)))
+
+(defwidget pcres []
+        (box :space-evenly false :spacing 20 :orientation "v"
+                (box :orientation "v" :space-evenly false (children :nth 0)
+                        (label :text "CPU" :class "pcrestext")
+                        (circular-progress :class "usage_cpu" :value "${EWW_CPU.avg}" :thickness 8
+                        (circular-progress :style "color: rgb(87,87,105)" :value "100" :thickness 35)))
+                (box :orientation "v" :space-evenly false (children :nth 1)
+                        (label :text "RAM" :class "pcrestext")
+                        (circular-progress :class "usage_ram" :value "${EWW_RAM.used_mem_perc}" :thickness 8
+                        (circular-progress :style "color: rgb(87,87,105)" :value "100" :thickness 35)))
+                (box :orientation "v" :space-evenly false (children :nth 2)
+                        (label :text "GPU" :class "pcrestext")
+                        (circular-progress :class "usage_gpu" :value "${usagegpu}" :thickness 8
+                        (circular-progress :style "color: rgb(87,87,105)" :value "100" :thickness 35)))))

@@ -1,0 +1,71 @@
+;;=================================================================;;
+;;===================           Bar             ===================;;
+;;=================================================================;;
+
+(defwindow bar
+:monitor 0
+:exclusive true
+:wm-ignore true
+:stacking "bg"
+:geometry (geometry :x "0px" :y "5px" :width "1900px" :height "28px" :anchor "top center")
+        (widgets))
+
+(defwidget widgets []
+(box :space-evenly false :hexpand false :spacing 5 :class "bar"
+        (widgets_left)
+        (widgets_right)))
+
+(defwidget widgets_left []
+(box :orientation "h" :space-evenly false :hexpand true :spacing 5
+        (left)
+        (musictrl)
+        (music)))
+
+(defwidget widgets_right []
+(box :orientation "h" :space-evenly false :hexpand false :spacing 5
+        (metrics)
+        (connection)
+        (right)))
+
+(defwidget right []
+        (box :class "time" :orientation "h" :hexpand false
+                (label :text "${time}" :tooltip "${timetip}")))
+
+(defwidget metrics []
+        (box :class "metrics" :hexpand true :space-evenly false :spacing 10
+                (eventbox :onrightclick "eww update volbar=false" :onclick "eww update volbar=true"
+                        (box :tooltip "Volume" :orientation "h" :hexpand true :space-evenly false
+                        (label :text "[${vol}]")
+                        (revealer :reveal volbar :transition "slideleft" :duration "700ms"
+                                (box :orientation "h" :hexpand true :style "padding-left: 5px;" :space-evenly false :spacing 10
+                                (label :text "${vols}")
+                                (scale :class "volbar" :min 0 :max 101 :value "${numvol}" :onchange "amixer sset Master {}%" :orientation "h")))))
+                (eventbox :onrightclick "eww update bribar=false" :onclick "eww update bribar=true"
+                        (box :space-evenly false :tooltip "Brightness"
+                        (label :text "[${brightness}]")
+                        (revealer :reveal bribar :transition "slideleft" :duration "700ms"
+                                (box :orientation "h" :hexpand true :style "padding-left: 5px;" :space-evenly false :spacing 10
+                                (label :text "${brightone}")
+                                (scale :class "bribar" :min 0 :max 101 :value "${xbacklight}" :onchange "xbacklight -set {}" :orientation "h")))))
+                ;;(label :text "<U+F07C0> ${round(EWW_CPU.avg, 0)}%" :tooltip "CPU Usage");;
+                ;;(label :text "<U+F1C0> ${round(EWW_RAM.used_mem_perc, 0)}%" :tooltip "RAM Usage");;
+                (label :text "[${battstatus} ${battprcnt}%]" :tooltip "Battery")))
+
+(defwidget connection []
+        (box :class "wifi" :hexpand false :space-evenly false :spacing 15
+                (label :text "${wifistat}" :tooltip "${wifistat2}")
+                (label :text "${bluez}")))
+
+(defwidget musictrl []
+        (box :class "msctrl" :spacing 20 :space-evenly true
+                (button :onclick "playerctl previous" "" )
+                (button :onclick "playerctl play-pause" "${playpause}" )
+                (button :onclick "playerctl next" "")))
+
+(defwidget music []
+        (box :class "media" :orientation "h" :hexpand "true"
+                (label :text "${getmedia}" :tooltip "${getmediafull}" :truncate true)))
+
+(defwidget left []
+        (box :class "menu" :orientation "h" :hexpand "false" :spacing 15 
+                (button :tooltip "Dashboard" :onclick "eww open dashboard" "󰁰")))

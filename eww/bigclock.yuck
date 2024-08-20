@@ -1,0 +1,30 @@
+;;=================================================================;;
+;;===================         Big Clock         ===================;;
+;;=================================================================;;
+
+
+(defwindow bigtime
+:monitor 0
+:wm-ignore true
+:stacking "bg"
+:geometry (geometry :x "805px" :y "315px")
+        (deskwidgets))
+
+(defwindow bigtimetip
+:monitor 0
+:wm-ignore true
+:stacking "bg"
+:geometry (geometry :x "0px" :y "15px" :anchor "bottom center")
+        (timetip))
+
+(defwidget deskwidgets []
+        (box :orientation "v" :space-evenly false :hexpand true
+        (bigtime)))
+
+(defwidget bigtime []
+        (box  :orientation "v" :space-evenly false
+                (label :class "maintime" :text "${bigtime}")
+                (label :class "maindate" :text "${bigdate}")))
+
+(defwidget timetip []
+        (label :class "bigtimetip" :text "${timetip}"))

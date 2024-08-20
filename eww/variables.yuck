@@ -1,0 +1,75 @@
+;;=================================================================;;
+;;===================         Variable          ===================;;
+;;=================================================================;;
+
+(defpoll wifistat :interval "1s"
+"scripts/wlan main")
+
+(defpoll wifistat2 :interval "1s"
+"scripts/wlan tooltip")
+
+(defpoll bluez :interval "1s"
+"scripts/wlan bluetooth")
+
+(defpoll brightness :interval "1s" 
+"scripts/bright bar")
+
+(defpoll brightone :interval "1s" 
+"scripts/bright one")
+
+(defpoll vol :interval "1s"
+"scripts/getvol vol")
+
+(defpoll vols :interval "1s"
+"scripts/getvol vols")
+
+(defpoll getmedia :interval "1s"
+"scripts/getmedia short")
+
+(defpoll getmediafull :interval "1s"
+"scripts/getmedia full")
+
+(defpoll time :interval "1s"
+"scripts/date fulldate")
+
+(defpoll timetip :interval "1s"
+"scripts/date timetip")
+
+(defpoll battstatus :interval "1s"
+"scripts/battery battstatus")
+
+(defpoll battprcnt :interval "1s"
+"scripts/battery battprcnt")
+
+(defpoll playpause :interval "1s"
+"scripts/music")
+
+(defpoll bigtime :interval "1s"
+"date '+%H:%M:%S'")
+
+(defpoll bigdate :interval "1s"
+"date '+%A, %B %d'")
+
+(defpoll usagegpu :interval "1s"
+"scripts/usagegpu")
+
+(defpoll whoami :interval "50s"
+"whoami")
+
+(defpoll hostname :interval "50s"
+"cat /etc/hostname")
+
+(defpoll dashhour :interval "20s"
+"date '+%H'")
+
+(defpoll xbacklight :interval "1s"
+"xbacklight -get")
+
+(defpoll numvol :interval "1s"
+"scripts/numvol")
+
+(defvar boxdashpower false)
+
+(defvar volbar false)
+
+(defvar bribar false)
