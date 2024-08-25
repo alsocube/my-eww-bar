@@ -1,0 +1,5 @@
+#!/usr/bin/sh
+
+check="$(hyprctl activeworkspace | grep "workspace ID" | tr -cd '[[:digit:]]' | cut -b 1)"
+
+echo $check

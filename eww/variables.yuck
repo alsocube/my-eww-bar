@@ -2,6 +2,9 @@
 ;;===================         Variable          ===================;;
 ;;=================================================================;;
 
+(defpoll workspace :interval "1s"
+"scripts/workspace")
+
 (defpoll wifistat :interval "1s"
 "scripts/wlan main")
 
@@ -29,6 +32,9 @@
 (defpoll getmediafull :interval "1s"
 "scripts/getmedia full")
 
+(defpoll mem :interval "1s"
+"scripts/mem")
+
 (defpoll time :interval "1s"
 "scripts/date fulldate")
 
@@ -50,8 +56,14 @@
 (defpoll bigdate :interval "1s"
 "date '+%A, %B %d'")
 
-(defpoll usagegpu :interval "1s"
+(defpoll usage_gpu :interval "1s"
 "scripts/usagegpu")
+
+(defpoll gpu_temp :interval "1s"
+"scripts/gpu_temp")
+
+(defpoll cpu_temp :interval "1s"
+"scripts/cpu_temp")
 
 (defpoll whoami :interval "50s"
 "whoami")
@@ -67,6 +79,8 @@
 
 (defpoll numvol :interval "1s"
 "scripts/numvol")
+
+(defvar hyprlock "scripts/hyprlock")
 
 (defvar boxdashpower false)
 

@@ -17,7 +17,7 @@
 
 (defwidget widgets_left []
 (box :orientation "h" :space-evenly false :hexpand true :spacing 5
-        (left)
+        (workspace)
         (musictrl)
         (music)))
 
@@ -47,13 +47,11 @@
                                 (box :orientation "h" :hexpand true :style "padding-left: 5px;" :space-evenly false :spacing 10
                                 (label :text "${brightone}")
                                 (scale :class "bribar" :min 0 :max 101 :value "${xbacklight}" :onchange "xbacklight -set {}" :orientation "h")))))
-                ;;(label :text "<U+F07C0> ${round(EWW_CPU.avg, 0)}%" :tooltip "CPU Usage");;
-                ;;(label :text "<U+F1C0> ${round(EWW_RAM.used_mem_perc, 0)}%" :tooltip "RAM Usage");;
                 (label :text "[${battstatus} ${battprcnt}%]" :tooltip "Battery")))
 
 (defwidget connection []
         (box :class "wifi" :hexpand false :space-evenly false :spacing 15
-                (label :text "${wifistat}" :tooltip "${wifistat2}")
+                (label :text "${wifistat}")
                 (label :text "${bluez}")))
 
 (defwidget musictrl []
@@ -63,9 +61,9 @@
                 (button :onclick "playerctl next" "")))
 
 (defwidget music []
-        (box :class "media" :orientation "h" :hexpand "true"
+        (box :class "media" :orientation "h" :hexpand true
                 (label :text "${getmedia}" :tooltip "${getmediafull}" :truncate true)))
 
-(defwidget left []
-        (box :class "menu" :orientation "h" :hexpand "false" :spacing 15 
-                (button :tooltip "Dashboard" :onclick "eww open dashboard" "󰁰")))
+(defwidget workspace []
+        (box :class "workspace" :orientation "h" :hexpand false
+                (label :text "Workspace No. ${workspace}")))

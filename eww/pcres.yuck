@@ -6,7 +6,7 @@
 :monitor 0
 :wm-ignore true
 :stacking "bg"
-:geometry (geometry :x "15px" :y "15px" :anchor "bottom right")
+:geometry (geometry :x "15px" :y "15px" :anchor "top right")
         (resbox))
 
 (defwidget resbox []
@@ -14,16 +14,21 @@
         (pcres)))
 
 (defwidget pcres []
-        (box :space-evenly false :spacing 20 :orientation "v"
-                (box :orientation "v" :space-evenly false (children :nth 0)
-                        (label :text "CPU" :class "pcrestext")
-                        (circular-progress :class "usage_cpu" :value "${EWW_CPU.avg}" :thickness 8
-                        (circular-progress :style "color: rgb(87,87,105)" :value "100" :thickness 35)))
-                (box :orientation "v" :space-evenly false (children :nth 1)
-                        (label :text "RAM" :class "pcrestext")
-                        (circular-progress :class "usage_ram" :value "${EWW_RAM.used_mem_perc}" :thickness 8
-                        (circular-progress :style "color: rgb(87,87,105)" :value "100" :thickness 35)))
-                (box :orientation "v" :space-evenly false (children :nth 2)
-                        (label :text "GPU" :class "pcrestext")
-                        (circular-progress :class "usage_gpu" :value "${usagegpu}" :thickness 8
-                        (circular-progress :style "color: rgb(87,87,105)" :value "100" :thickness 35)))))
+        (box :space-evenly false :spacing 15 :orientation "v"
+                (box :orientation "h" :space-evenly false :spacing 8
+                        (label :class "pcrestext" :text "CPU" :angle "90")
+                        (box :orientation "v" :space_evenly false :spacing 5
+                                (box :tooltip "${round(EWW_CPU.avg, 0)}% Avg. Usage"
+                                (scale :class "usage_cpu" :flipped "true" :min 0 :max 101 :value "${round(EWW_CPU.avg, 0)}" :orientation "v" :active false))
+                                (box :tooltip "${cpu_temp}° Celcius"
+                                (scale :class "cpu_temp" :flipped "true" :min 0 :max 101 :value "${cpu_temp}" :orientation "v" :active false))))
+                (box :orientation "h" :space-evenly false :spacing 8 :tooltip "${mem} MB / 15697 MB Used"
+                        (label :class "pcrestext" :text "RAM" :angle "90")
+                        (scale :class "usage_ram" :flipped "true" :min 0 :max 101 :value "${round(EWW_RAM.used_mem_perc, 0)}" :orientation "v" :active false))
+                (box :orientation "h" :space-evenly false :spacing 8
+                        (label :class "pcrestext" :text "GPU" :angle "90")
+                        (box :orientation "v" :space_evenly false :spacing 5
+                                (box :tooltip "${usage_gpu}% Usage"
+                                (scale :class "usage_gpu" :flipped "true" :min 0 :max 101 :value "${usage_gpu}" :orientation "v" :active false))
+                                (box :tooltip "${gpu_temp}° Celcius"
+                                (scale :class "gpu_temp" :flipped "true" :min 0 :max 101 :value "${gpu_temp}" :orientation "v" :active false))))))

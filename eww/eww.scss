@@ -77,6 +77,16 @@ tooltip {
   color: red;
 }
 
+.workspace {
+  font-size: 16px;
+  font-family: $font;
+  border: dotted 1px;
+  border-color: $border;
+  border-radius: $rad;
+  background-color: $background2;
+  padding: 0px 18px 0px 15px;
+}
+
 .media {
   border: dotted 1px;
   border-color: $border;
@@ -179,8 +189,14 @@ tooltip {
 //------------Big Clock on Desktop------------//
 
 .maintime {
-  font-family: "Terminus (TTF)";
+  font-family: "Noto Serif Display ExtraBold";
   font-size: 60px;
+  color: rgba(44,44,52,1);
+}
+
+.maindate {
+  font-family: "Rage Italic";
+  font-size: 30px;
   color: rgba(44,44,52,1);
 }
 
@@ -190,11 +206,100 @@ tooltip {
   color: $fontcolor;
 }
 
-.maindate, .usage_gpu, .usage_ram, .usage_cpu {
+//------------PC Resources------------//
+
+.usage_ram trough {
+  background-color: $fontcolor;
+  min-width: 8px;
+  min-height: 100px;
+  border-radius: $rad;
+}
+
+.usage_gpu, .gpu_temp trough {
+  background-color: $fontcolor;
+  min-width: 8px;
+  min-height: 50px;
+  border-radius: $rad;
+}
+
+.usage_cpu, .cpu_temp trough {
+  background-color: $fontcolor;
+  min-width: 8px;
+  min-height: 50px;
+  border-radius: $rad;
+}
+
+.usage_cpu scale trough highlight {
+  all: unset;
+  background-color: $background2;
+}
+
+.cpu_temp scale trough highlight {
+  all: unset;
+  background-color: darkred;
+}
+
+.usage_cpu trough highlight {
+  all: unset;
+  background-color: $background2;
+  min-height: 0px;
+  min-width: 8px;
+  border-radius: $rad;
+}
+
+.cpu_temp trough highlight {
+  all: unset;
+  background-color: darkred;
+  min-height: 0px;
+  min-width: 8px;
+  border-radius: $rad;
+}
+
+.usage_ram scale trough highlight {
+  all: unset;
+  background-color: $background2;
+}
+
+.usage_ram trough highlight {
+  all: unset;
+  background-color: $background2;
+  min-height: 0px;
+  min-width: 8px;
+  border-radius: $rad;
+}
+
+.usage_gpu scale trough highlight {
+  all: unset;
+  background-color: $background2;
+}
+
+.gpu_temp scale trough highlight {
+  all: unset;
+  background-color: darkred;
+}
+
+.usage_gpu trough highlight {
+  all: unset;
+  background-color: $background2;
+  min-height: 0px;
+  min-width: 8px;
+  border-radius: $rad;
+}
+
+.gpu_temp trough highlight {
+  all: unset;
+  background-color: darkred;
+  min-height: 0px;
+  min-width: 8px;
+  border-radius: $rad;
+}
+
+/*.usage_gpu, .usage_ram, .usage_cpu {
   font-family: $font;
   font-size: 30px;
-  color: rgba(44,44,52,1);
-}
+  color: $background2;
+  background-color: $fontcolor;
+}*/
 
 .pcrestext {
   font-size: 20px;
@@ -228,7 +333,7 @@ tooltip {
 
 .boxdashpower {
   background-color: $background2;
-  padding: 10px 0px 9px 0px;
+  padding: 10px 0px 3px 0px;
   border-radius: $rad;
   border: dotted 1px;
 }
@@ -258,7 +363,7 @@ tooltip {
 .varbar1 trough {
   background-color: $fontcolor;
   min-width: 100px;
-  border-radius: 50px
+  border-radius: 50px;
 }
 
 .varbar1 scale trough highlight {
@@ -319,7 +424,7 @@ tooltip {
   background-color: $fontcolor;
   min-width: 20px;
   min-height: 100px;
-  //border-radius: 50px
+  border-radius: $rad;
 }
 
 .volbarvertical scale trough highlight {
@@ -333,14 +438,14 @@ tooltip {
   background-color: yellow;
   min-height: 0px;
   min-width: 20px;
-  //border-radius: 50px;
+  border-radius: $rad;
 }
 
 .bribarvertical trough {
   background-color: $fontcolor;
   min-width: 20px;
   min-height: 100px;
-  //border-radius: 50px
+  border-radius: $rad;
 }
 
 .bribarvertical scale trough highlight {
@@ -354,7 +459,7 @@ tooltip {
   background-color: purple;
   min-height: 0px;
   min-width: 14px;
-  //border-radius: 50px;
+  border-radius: $rad;
 }
 
 .pwrbuttons {

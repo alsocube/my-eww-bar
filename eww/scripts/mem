@@ -1,0 +1,6 @@
+#! /usr/bin/sh
+
+total="$(free | awk -F" " '/Mem:/ {print $2}')"
+used="$(free | awk -F" " '/Mem:/ {print $3}')"
+
+echo $(( $used / 1024 ))

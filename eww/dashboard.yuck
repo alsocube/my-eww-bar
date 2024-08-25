@@ -61,12 +61,12 @@
                                         (box :space-evenly false :orientation "v" :tooltip "Shutdown"
                                         (button :onclick "poweroff" :class "poff"
                                         (label :text "󰐦" :style "font-size: 45px;" :xalign 0.46))
-                                        (revealer :reveal boxdashpower :transition "slideup" :duration "1000ms"
+                                        (revealer :reveal boxdashpower :transition "slideup" :duration "500ms"
                                                 (box :orientation "v"
                                                         (box :tooltip "Reboot"
                                                         (button :onclick "reboot" :class "rbtt"
                                                         (label :text "󰑙" :style "font-size: 45px;" :xalign 0.46)))
-                                                        (box :tooltip "Close Dashboard"
-                                                        (button :onclick "eww close dashboard && eww update boxdashpower=false" :class "cncl"
+                                                        (box :tooltip "Lock Session"
+                                                        (button :onclick "eww update boxdashpower=false && ${hyprlock}" :class "cncl"
                                                         (label :text "" :style "font-size: 35px;" :xalign 0.46)))
                                                 )))))))))))
