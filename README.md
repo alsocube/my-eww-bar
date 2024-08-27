@@ -5,6 +5,7 @@ My simple, mostly "inspired" by others, bar made with [Elkowar's Wacky Widget](h
 I'm using XWayland, you might need to change some config accordingly. [Eww Wiki](https://elkowar.github.io/eww/)
 
 # Showcases
+![bar](bar.gif)
 <img src="desktop.png">
 <img src="desktop_full.png">
 <img src="dashboard.png">
