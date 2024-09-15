@@ -17,7 +17,7 @@
         (box :space-evenly false :spacing 15 :orientation "v"
                 (box :orientation "h" :space-evenly false :spacing 8
                         (label :class "pcrestext" :text "CPU" :angle "90")
-                        (box :orientation "v" :space_evenly false :spacing 5
+                        (box :orientation "v" :space-evenly false :spacing 5
                                 (box :tooltip "${round(EWW_CPU.avg, 0)}% Avg. Usage"
                                 (scale :class "usage_cpu" :flipped "true" :min 0 :max 101 :value "${round(EWW_CPU.avg, 0)}" :orientation "v" :active false))
                                 (box :tooltip "${cpu_temp}° Celcius"
@@ -27,7 +27,7 @@
                         (scale :class "usage_ram" :flipped "true" :min 0 :max 101 :value "${round(EWW_RAM.used_mem_perc, 0)}" :orientation "v" :active false))
                 (box :orientation "h" :space-evenly false :spacing 8
                         (label :class "pcrestext" :text "GPU" :angle "90")
-                        (box :orientation "v" :space_evenly false :spacing 5
+                        (box :orientation "v" :space-evenly false :spacing 5
                                 (box :tooltip "${usage_gpu}% Usage"
                                 (scale :class "usage_gpu" :flipped "true" :min 0 :max 101 :value "${usage_gpu}" :orientation "v" :active false))
                                 (box :tooltip "${gpu_temp}° Celcius"
