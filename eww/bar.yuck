@@ -33,26 +33,36 @@
 
 (defwidget metrics []
         (box :class "metrics" :hexpand true :space-evenly false :spacing 10
-                (eventbox :onrightclick "eww update volbar=false" :onclick "eww update volbar=true"
-                        (box :tooltip "Volume" :orientation "h" :hexpand true :space-evenly false
-                        (label :text "[${vol}]")
-                        (revealer :reveal volbar :transition "slideleft" :duration "700ms"
+                (box :tooltip "Volume" :orientation "h" :hexpand true :space-evenly false
+                        (revealer :reveal volnum :transition "slideright" :duration "700ms"
+                          (label :class "vol" :text "${vols}")))
+                (eventbox :onhoverlost "eww update volbar=false && eww update volnum=true" :onclick "eww update volbar=true && eww update volnum=false"
+                        (box :orientation "h" :hexpand true :space-evenly false
+                          (image :path "${vol}" :image-width 18 :image-height 18 :class "metricsicon")
+                          (revealer :reveal volbar :transition "slideleft" :duration "700ms"
+                                (box :orientation "h" :hexpand true :style "padding-left: 5px;" :space-evenly false
+                                (scale :class "volbar" :min 0 :max 101 :value "${numvol}" :onchange "amixer sset Master {}% && sh ~/.config/hypr/scripts/brivolnotif.sh vol" :orientation "h")))))
+                (box :tooltip "Brightness" :orientation "h" :hexpand true :space-evenly false
+                        (revealer :reveal brinum :transition "slideright" :duration "700ms"
+                        (label :class "brightnum" :text "${brightone}")))
+                (eventbox :onhoverlost "eww update bribar=false && eww update brinum=true" :onclick "eww update bribar=true && eww update brinum=false"
+                        (box :space-evenly false 
+                          (image :path "img/lightbulb.svg" :image-width 17 :image-height 17 :class "metricsicon")
+                          (revealer :reveal bribar :transition "slideleft" :duration "700ms"
                                 (box :orientation "h" :hexpand true :style "padding-left: 5px;" :space-evenly false :spacing 10
-                                (label :text "${vols}")
-                                (scale :class "volbar" :min 0 :max 101 :value "${numvol}" :onchange "amixer sset Master {}%" :orientation "h")))))
-                (eventbox :onrightclick "eww update bribar=false" :onclick "eww update bribar=true"
-                        (box :space-evenly false :tooltip "Brightness"
-                        (label :text "[${brightness}]")
-                        (revealer :reveal bribar :transition "slideleft" :duration "700ms"
-                                (box :orientation "h" :hexpand true :style "padding-left: 5px;" :space-evenly false :spacing 10
-                                (label :text "${brightone}")
-                                (scale :class "bribar" :min 0 :max 101 :value "${xbacklight}" :onchange "xbacklight -set {}" :orientation "h")))))
-                (label :text "[${battstatus} ${battprcnt}%]" :tooltip "Battery")))
+                                (scale :class "bribar" :min 0 :max 101 :value "${brightone}" :onchange "brightnessctl set {}% && sh ~/.config/hypr/scripts/brivolnotif.sh bright" :orientation "h")))))
+                (eventbox :onhover "eww update battstat=true" :onhoverlost "eww update battstat=false"
+                        (box :space-evenly false :tooltip "Battery"
+                          (image :path "${battstatus}" :image-width 18 :image-height 18 :class "metricsicon")
+                          (revealer :reveal battstat :transition "slideleft" :duration "700ms"
+                                (label :text "${battprcnt}%" :class "battprcnt"))))))
+
+(defvar battstat false)
 
 (defwidget connection []
-        (box :class "wifi" :hexpand false :space-evenly false :spacing 15
-                (label :text "${wifistat}")
-                (label :text "${bluez}")))
+        (box :class "wlanbox" :hexpand false :space-evenly false :spacing 15
+                (button :class "wifi" :onclick "scripts/rofi-wifi-menu.sh" "${wifistat}")
+                (label :class "bluez" :text "${bluez}")))
 
 (defwidget musictrl []
         (box :class "msctrl" :spacing 20 :space-evenly true
@@ -65,5 +75,12 @@
                 (label :text "${getmedia}" :tooltip "${getmediafull}" :truncate true)))
 
 (defwidget workspace []
-        (box :class "workspace" :orientation "h" :hexpand false
-                (label :text "Workspace No. ${workspace}")))
+        (box :class "workspace" :orientation "h" :hexpand false :space-evenly true
+                (box
+                (button :class "wsbutton" :style "${acws1}" :onclick "hyprctl dispatch workspace 1" "1"))
+                (box
+                (button :class "wsbutton" :style "${acws2}" :onclick "hyprctl dispatch workspace 2" "2"))
+                (box
+                (button :class "wsbutton" :style "${acws3}" :onclick "hyprctl dispatch workspace 3" "3"))
+                (box
+                (button :class "wsbutton" :style "${acws4}" :onclick "hyprctl dispatch workspace 4" "4"))))
