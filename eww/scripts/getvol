@@ -1,16 +1,16 @@
 #!/usr/bin/sh
 
-vol="$(amixer sget Master | awk -F"[][]" '/Right:/ {print $2}' | tr -cd '[[:digit:]]' | sed '/%d/g')"
+vol="$(amixer | awk -F" " '/Left: Playback/ {print substr($5, 2, length($5)-3)}')"
 
 icons() {
 if (( 10#$vol == 100 )); then
-	echo "󰕾 "
+	echo "img/speaker-high.svg"
 elif (( 10#$vol > 50 )) || (( 10#$vol == 50 )); then
-	echo "󰕾 "
+	echo "img/speaker-high.svg"
 elif (( 10#$vol < 50 )) && (( 10#$vol > 0 )); then
-	echo "󰖀 "
+	echo "img/speaker-low.svg"
 elif (( 10#$vol == 0 )); then
-	echo "󰸈 "
+	echo "img/speaker-simple-x.svg"
 fi
 }
 

@@ -9,6 +9,8 @@ if [ $stat == "Playing" ]; then
 	echo "$music"
 elif [ $stat == "Paused" ]; then
 	echo "++== Paused ==++"
+elif [ $stat == "" ]; then
+	echo "I don't think I Recognise What Is Playing Right Now"
 else
 	echo "Nothing Played Right Now"
 fi

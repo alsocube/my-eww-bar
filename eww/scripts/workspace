@@ -1,5 +1,30 @@
 #!/usr/bin/sh
 
-check="$(hyprctl activeworkspace | grep "workspace ID" | tr -cd '[[:digit:]]' | cut -b 1)"
+active="$(hyprctl activeworkspace | sed 2,9d | awk -F" " '{print $3}' | tr -cd '[[:digit:]]')"
 
-echo $check
+ws1=1
+ws2=2
+ws3=3
+ws4=4
+
+acws="background-color: rgb(195,195,195); color: rgb(0,0,0);"
+
+if [ "$1" == "acws1" ] && [ $active == 1 ]; then
+	echo "$acws"
+elif [ "$1" == "acws2" ] && [ $active == 2 ]; then
+	echo $acws
+elif [ "$1" == "acws3" ] && [ $active == 3 ]; then
+	echo $acws
+elif [ "$1" == "acws4" ] && [ $active == 4 ]; then
+	echo $acws
+elif [ "$1" == "acws5" ] && [ $active == 5 ]; then
+	echo $acws
+elif [ "$1" == "acws6" ] && [ $active == 6 ]; then
+	echo $acws
+elif [ "$1" == "acws7" ] && [ $active == 7 ]; then
+	echo $acws
+elif [ "$1" == "acws8" ] && [ $active == 8 ]; then
+	echo $acws
+elif [ "$1" == "acws9" ] && [ $active == 9 ]; then
+	echo $acws
+fi

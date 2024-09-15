@@ -1,5 +1,5 @@
 #! /usr/bin/bash
 
-gputemp=$(nvidia-smi | awk '/60W/ {print $3}' | tr -cd '[[:digit:]]')
+gputemp=$(nvidia-smi | awk '/Default/ {print $3}' | tr -cd '[[:digit:]]')
 
 echo $gputemp

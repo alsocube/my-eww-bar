@@ -6,38 +6,40 @@ prcnt="$(cat "$bat/capacity" | tr -cd '[[:digit:]]')"
 
 nocharge() {
 if (( $prcnt == 100 )); then
-	echo "󰁹"
+	echo "img/battery-full.svg"
 elif (( $prcnt > 89 )); then
-	echo "󰂂"
+	echo "img/battery-high.svg"
 elif (( $prcnt > 79 )) || (( $prcnt == 79 )); then
-	echo "󰂀"
+	echo "img/battery-medium.svg"
 elif (( $prcnt > 49 )); then
-	echo "󰁿"
+	echo "img/battery-medium.svg"
 elif (( $prcnt > 29 )); then
-	echo "󰁼"
+	echo "img/battery-low.svg"
 elif (( $prcnt > 19 )) || (( $prcnt == 19 )) ; then
-	echo "󰁻"
+	echo "img/battery-empty.svg"
 elif (( $prcnt < 19 )); then
-	echo "󰂃"
+	echo "img/battery-warning.svg"
 fi
 }
 
 charge() {
-if (( $prcnt == 100 )); then
-	echo "󰂅"
-elif (( $prcnt > 89 )); then
-	echo "󰂋"
-elif (( $prcnt > 79 )); then
-	echo "󰂊"
-elif (( $prcnt > 59 )); then
-	echo "󰂉"
-elif (( $prcnt > 39 )); then
-	echo "󰂈"
-elif (( $prcnt > 19 )) || (( $prcnt == 19 )); then
-	echo "󰂇"
-elif (( $prcnt < 19 )); then
-	echo "󰂆"
-fi
+#if (( $prcnt == 100 )); then
+#	echo "󰂅"
+#elif (( $prcnt > 89 )); then
+#	echo "󰂋"
+#elif (( $prcnt > 79 )); then
+#	echo "󰂊"
+#elif (( $prcnt > 59 )); then
+#	echo "󰂉"
+#elif (( $prcnt > 39 )); then
+#	echo "󰂈"
+#elif (( $prcnt > 19 )) || (( $prcnt == 19 )); then
+#	echo "󰂇"
+#elif (( $prcnt < 19 )); then
+#	echo "󰂆"
+#fi
+
+echo "img/battery-charging.svg"
 }
 
 battprcnt() {
@@ -47,5 +49,5 @@ battprcnt() {
 [ "$1" == "battstatus" ] && [ "$stat" == "Charging" ] && charge && exit
 [ "$1" == "battstatus" ] && [ "$stat" == "Discharging" ] && nocharge && exit
 [ "$1" == "battstatus" ] && [ "$stat" == "Not charging" ] && nocharge && exit
-[ "$1" == "battstatus" ] && [ "$stat" == "Full" ] && echo "󰁹" && exit
+[ "$1" == "battstatus" ] && [ "$stat" == "Full" ] && nocharge && exit
 [ "$1" == "battprcnt" ] && battprcnt && exit

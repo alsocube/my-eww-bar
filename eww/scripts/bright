@@ -1,6 +1,6 @@
 #!/usr/bin/sh
 
-prnt="$(brightnessctl -m -d intel_backlight | awk -F, '{print substr($4, 0, length($4)-1)}')"
+prnt="$(brightnessctl -m | awk -F, '{print substr($4, 0, length($4)-1)}')"
 
 bar() {
 if (( $prnt > 70 )); then
