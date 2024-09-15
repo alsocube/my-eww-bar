@@ -87,6 +87,12 @@ tooltip {
   padding: 0px 18px 0px 15px;
 }
 
+.wsbutton {
+  background-color: $background2;
+  padding: 0px 5px 0px 5px;
+  margin: 3px 3px 3px 3px;
+}
+
 .media {
   border: dotted 1px;
   border-color: $border;
@@ -97,6 +103,7 @@ tooltip {
   font-family: $font;
   font-size: 15px;
   background-color: $background2;
+  color: lightblue;
 }
 
 .metrics {
@@ -109,16 +116,28 @@ tooltip {
   background-color: $background2;
 }
 
+.vol {
+  color: yellow;
+}
+
+.brightnum {
+  color: #ffa348;
+}
+
 .volbar trough {
   background-color: $fontcolor;
   min-width: 100px;
   border-radius: 50px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .volbar scale trough highlight {
   all: unset;
   background-color: yellow;
   border-radius: 50px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .volbar trough highlight {
@@ -127,31 +146,54 @@ tooltip {
   min-height: 7px;
   min-width: 0px;
   border-radius: 50px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .bribar trough {
   background-color: $fontcolor;
   min-width: 100px;
-  border-radius: 50px
+  border-radius: 50px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .bribar scale trough highlight {
   all: unset;
-  background-color: purple;
+  background-color: #ffa348;
   border-radius: 50px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .bribar trough highlight {
   all: unset;
-  background-color: purple;
+  background-color: #ffa348;
   min-height: 7px;
   min-width: 0px;
   border-radius: 50px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.battprcnt {
+  padding: 0px 5px 0px 5px;
+  color: #62A0EA;
 }
 
 .wifi {
+  color: #DCA8DD;
   font-family: $font;
   //font-size: 18px;
+}
+
+.bluez {
+  color: #3584E4;
+  font-family: $font;
+  //font-size: 18px;
+}
+
+.wlanbox {
   padding: 0px 15px 0px 15px;
   border: dotted 1px;
   border-radius: $rad;
@@ -326,7 +368,7 @@ tooltip {
 
 .boxdash3 {
   background-color: $background2;
-  padding: 20px 20px 25px 20px;
+  padding: 35px 20px 37px 20px;
   border-radius: $rad;
   border: dotted 1px;
 }
@@ -339,7 +381,7 @@ tooltip {
 }
 
 .boxdashvolbribar {
-  font-family: "Terminus (TTF)", "Bold";
+  font-family: "Terminus", "Bold";
   background-color: $background2;
   padding: 15px 15px 15px 15px;
   border-radius: $rad;
@@ -450,13 +492,13 @@ tooltip {
 
 .bribarvertical scale trough highlight {
   all: unset;
-  background-color: purple;
+  background-color: #ffa348;
   //border-radius: 50px;
 }
 
 .bribarvertical trough highlight {
   all: unset;
-  background-color: purple;
+  background-color: #ffa348;
   min-height: 0px;
   min-width: 14px;
   border-radius: $rad;
