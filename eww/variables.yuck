@@ -14,16 +14,16 @@
 (defpoll bluez :interval "1s"
 "scripts/wlan bluetooth")
 
-(defpoll brightness :interval "1s" 
+(defpoll brightness :interval "1s"
 "scripts/bright bar")
 
-(defpoll brightone :interval "1s" 
+(defpoll brightone :interval "0s"
 "scripts/bright one")
 
 (defpoll vol :interval "1s"
 "scripts/getvol vol")
 
-(defpoll vols :interval "1s"
+(defpoll vols :interval "0s"
 "scripts/getvol vols")
 
 (defpoll getmedia :interval "1s"
@@ -59,23 +59,20 @@
 (defpoll usage_gpu :interval "1s"
 "scripts/usagegpu")
 
-(defpoll gpu_temp :interval "1s"
+(defpoll gpu_temp :interval "5s"
 "scripts/gpu_temp")
 
-(defpoll cpu_temp :interval "1s"
+(defpoll cpu_temp :interval "5s"
 "scripts/cpu_temp")
 
-(defpoll whoami :interval "50s"
+(defpoll whoami :interval "10m"
 "whoami")
 
-(defpoll hostname :interval "50s"
+(defpoll hostname :interval "10h"
 "cat /etc/hostname")
 
-(defpoll dashhour :interval "20s"
+(defpoll dashhour :interval "20m"
 "date '+%H'")
-
-(defpoll xbacklight :interval "1s"
-"xbacklight -get")
 
 (defpoll numvol :interval "1s"
 "scripts/numvol")
@@ -86,4 +83,36 @@
 
 (defvar volbar false)
 
+(defvar volnum true)
+
+(defvar brinum true)
+
 (defvar bribar false)
+
+;;--- Wokrkspaces ---;;
+(defpoll acws1 :interval "1s"
+"scripts/workspace acws1")
+
+(defpoll acws2 :interval "1s"
+"scripts/workspace acws2")
+
+(defpoll acws3 :interval "1s"
+"scripts/workspace acws3")
+
+(defpoll acws4 :interval "1s"
+"scripts/workspace acws4")
+
+;;(defpoll acws5 :interval "1s"
+;;"scripts/workspace acws5")
+
+;;(defpoll acws6 :interval "1s"
+;;"scripts/workspace acws6")
+
+;;(defpoll acws7 :interval "1s"
+;;"scripts/workspace acws7")
+
+;;(defpoll acws8 :interval "1s"
+;;"scripts/workspace acws8")
+
+;;(defpoll acws9 :interval "1s"
+;;"scripts/workspace acws9")
