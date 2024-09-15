@@ -16,16 +16,16 @@
                 (box :class "boxdashvolbribar" :space-evenly false :spacing 15
                         (box :space-evenly false :spacing 15 :orientation "v"
                                 (label :text "${vols}" :vexpand false)
-                                (scale :class "volbarvertical" :min 0 :max 101 :value "${numvol}" :onchange "amixer sset Master {}%" :orientation "v" :flipped true :vexpand true)
-                                (label :text "${vol}" :vexpand false))
+                                (scale :class "volbarvertical" :min 0 :max 101 :value "${numvol}" :onchange "amixer sset Master {}% && sh ~/.config/hypr/scripts/brivolnotif.sh vol" :orientation "v" :flipped true :vexpand true)
+                                (image :path "${vol}" :image-height 18 :image-width 18 :vexpand false))
                         (box :space-evenly false :spacing 15 :orientation "v"
                                 (label :text "${brightone}" :vexpand false)
-                                (scale :class "bribarvertical" :min 0 :max 101 :value "${xbacklight}" :onchange "xbacklight -set {}" :orientation "v" :flipped true :vexpand true)
-                                (label :text "${brightness}" :vexpand false)))
+                                (scale :class "bribarvertical" :min 0 :max 101 :value "${brightone}" :onchange "brightnessctl set {}% && sh ~/.config/hypr/scripts/brivolnotif.sh bright" :orientation "v" :flipped true :vexpand true)
+                                (image :path "img/lightbulb.svg" :image-height 18 :image-width 18 :vexpand false)))
                 (box :space-evenly false :spacing 15
                 (box :orientation "v" :space-evenly false :spacing 15
                         (box :class "boxdash1" :orientation "v" :space-evenly false :spacing 15
-                        (image :path "img/profile.jpg" :image-height "120" :image-width "120")
+                        (image :path "img/sanya.jpg" :image-height 150 :image-width 150)
                         (label :class "dashboard1" :text "I'am ${whoami}")
                         (label :class "dashboard1" :text "@${hostname}"))
                 (box :class "boxdash2" :orientation "v" :space-evenly false :spacing 15
@@ -45,16 +45,16 @@
                 (box :orientation "v" :space-evenly false :spacing 15
                         (box :class "boxdash3" :orientation "v" :space-evenly false :spacing 20
                                 (box :tooltip "Files"
-                                (button :onclick "(nautilus &) && eww close dashboard"
+                                (button :onclick "(nautilus &) && eww ping"
                                 (image :path "img/nautilus.svg" :image-height 50 :image-width 50)))
                                 (box :tooltip "Firefox"
-                                (button :onclick "(firefox &) && eww close dashboard"
+                                (button :onclick "firefox"
                                 (image :path "img/firefox.svg" :image-height 50 :image-width 50)))
                                 (box :tooltip "Steam"
-                                (button :onclick "(steam &) && eww close dashboard"
+                                (button :onclick "steam"
                                 (image :path "img/steam.svg" :image-height 50 :image-width 50)))
                                 (box :tooltip "Discord"
-                                (button :onclick "(discord &) && eww close dashboard"
+                                (button :onclick "discord"
                                 (image :path "img/discord.svg" :image-height 50 :image-width 50))))
                         (box :class "boxdashpower" :orientation "v"
                                 (eventbox :onhover "eww update boxdashpower=true" :onhoverlost "eww update boxdashpower=false"
